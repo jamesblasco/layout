@@ -6,7 +6,7 @@ import 'fluid_layout.dart';
 class Fluid extends StatelessWidget {
   final Widget child;
   final double horizontalPadding;
-  const Fluid({Key key, this.child, this.horizontalPadding}) : super(key: key);
+  const Fluid({Key key, this.child, this.horizontalPadding = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class SliverFluid extends SingleChildRenderObjectWidget {
       BuildContext context, RenderSliverPadding renderObject) {
     renderObject
       ..padding = EdgeInsets.symmetric(
-          horizontal: FluidLayout.of(context).fluidPadding)
+          horizontal: FluidLayout.of(context).fluidPadding + horizontalPadding)
       ..textDirection = Directionality.of(context);
   }
 
