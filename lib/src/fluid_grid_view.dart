@@ -1,3 +1,4 @@
+import 'package:fluid_layout/fluid_layout.dart';
 import 'package:fluid_layout/src/fluid_breakpoint.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -9,20 +10,20 @@ class BreakpointColumn extends StatelessWidget {
 
   final Widget child;
 
-  const BreakpointColumn.fit({Key key, this.crossAxisCellCount = 0, this.child})
+  const BreakpointColumn.fit({Key key, @required this.crossAxisCellCount, this.child})
       :   assert(crossAxisCellCount != null && crossAxisCellCount >= 0),
-        mainAxisCellCount = 0,
-        mainAxisExtent = 0,
+        mainAxisCellCount = null,
+        mainAxisExtent = null,
         super(key: key);
 
-  const BreakpointColumn.extent({Key key, this.crossAxisCellCount = 0, this.mainAxisExtent, this.child})
+  const BreakpointColumn.extent({Key key, @required this.crossAxisCellCount, @required  this.mainAxisExtent, this.child})
       :   assert(crossAxisCellCount != null && crossAxisCellCount >= 0),
-        mainAxisCellCount = 0,
+        mainAxisCellCount = null,
         super(key: key);
 
-  const BreakpointColumn.count({Key key, this.crossAxisCellCount = 0, this.mainAxisCellCount = 0, this.child})
+  const BreakpointColumn.count({Key key, @required this.crossAxisCellCount, @required this.mainAxisCellCount, this.child})
       :   assert(crossAxisCellCount != null && crossAxisCellCount >= 0),
-        mainAxisExtent = 0,
+        mainAxisExtent = null,
         super(key: key);
 
 
@@ -44,26 +45,28 @@ class BreakpointColumn extends StatelessWidget {
 }
 
 extension FluidStaggeredGridView on StaggeredGridView {
-  static StaggeredGridView fluid({List<BreakpointColumn> children}) {
-    return StaggeredGridView.count(
+  static Widget fluid(
+      {List<BreakpointColumn> children, double spacing}) {
+    return Builder(builder: (context) => StaggeredGridView.count(
       crossAxisCount: 12,
       children: children,
       staggeredTiles:children.map((child) => child._tile).toList(),
-      mainAxisSpacing: 4.0,
-      crossAxisSpacing: 4.0,
-    );
+      mainAxisSpacing: spacing ?? defaultSpacing(context),
+      crossAxisSpacing: spacing ?? defaultSpacing(context)
+    ));
   }
 }
 
 extension SliverFluidStaggeredGrid on SliverStaggeredGrid {
-  static SliverStaggeredGrid fluid({List<BreakpointColumn> children}) {
-    return SliverStaggeredGrid.count(
+  static Widget fluid({List<BreakpointColumn> children, double spacing}) {
+    return Builder(builder: (context) =>
+      SliverStaggeredGrid.count(
       crossAxisCount: 12,
       children: children,
       staggeredTiles:children.map((child) => child._tile).toList(),
-      mainAxisSpacing: 4.0,
-      crossAxisSpacing: 4.0,
-    );
+          mainAxisSpacing: spacing ?? defaultSpacing(context),
+          crossAxisSpacing: spacing ?? defaultSpacing(context)
+    ));
   }
 }
 
@@ -112,3 +115,4 @@ class ColumnSize extends ValueWithBreakpoint<int> {
 
   const ColumnSize.zero() : super.all(0);
 }
+

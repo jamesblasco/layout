@@ -1,12 +1,15 @@
-
-
 import 'package:flutter/widgets.dart';
 
 import '../fluid_layout.dart';
 
-extension FluidInt on int {
-  static int fluid(BuildContext context, int value,
-      {int xs, int s, int m, int l, int xl}) {
+extension FluidContext on BuildContext {
+  T fluid<T>(T value, {T xs, T s, T m, T l, T xl}) =>
+      FluidValue.fluid(this, value, xs: xs, s: s, m: m, l: l, xl: xl);
+}
+
+class FluidValue {
+  static T fluid<T>(BuildContext context, T value,
+      {T xs, T s, T m, T l, T xl}) {
     final breakpoint = FluidLayout.of(context).fluidBreakpoint;
     switch (breakpoint) {
       case FluidBreakpoint.xs:
@@ -23,3 +26,12 @@ extension FluidInt on int {
     return value;
   }
 }
+
+const double _spacer = 16;
+
+double defaultSpacing(BuildContext context) => FluidValue.fluid(context, 0,
+    xs: _spacer * 1,
+    s: _spacer * 1.25,
+    m: _spacer * 1.5,
+    l: _spacer * 2,
+    xl: _spacer * 3);
