@@ -55,6 +55,18 @@ extension FluidStaggeredGridView on StaggeredGridView {
   }
 }
 
+extension SliverFluidStaggeredGrid on SliverStaggeredGrid {
+  static SliverStaggeredGrid fluid({List<BreakpointColumn> children}) {
+    return SliverStaggeredGrid.count(
+      crossAxisCount: 12,
+      children: children,
+      staggeredTiles:children.map((child) => child._tile).toList(),
+      mainAxisSpacing: 4.0,
+      crossAxisSpacing: 4.0,
+    );
+  }
+}
+
 class ValueWithBreakpoint<Class> {
   final Class xs;
   final Class s;
