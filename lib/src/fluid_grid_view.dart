@@ -16,7 +16,7 @@ class BreakpointColumn extends StatelessWidget {
         mainAxisExtent = null,
         super(key: key);
 
-  const BreakpointColumn.extent({Key key, @required this.crossAxisCellCount, @required  this.mainAxisExtent, this.child})
+  const BreakpointColumn.extent({Key key, @required this.crossAxisCellCount, @required this.mainAxisExtent, this.child})
       :   assert(crossAxisCellCount != null && crossAxisCellCount >= 0),
         mainAxisCellCount = null,
         super(key: key);
@@ -36,9 +36,9 @@ class BreakpointColumn extends StatelessWidget {
     if (mainAxisCellCount == null && mainAxisExtent == null){
       return StaggeredTile.fit(crossAxisCellCount);
     } else if (mainAxisCellCount == null){
-      return StaggeredTile.count(crossAxisCellCount, mainAxisCellCount);
-    } else {
       return StaggeredTile.extent(crossAxisCellCount, mainAxisExtent);
+    } else {
+      return StaggeredTile.count(crossAxisCellCount, mainAxisCellCount);
     }
   }
 
@@ -58,15 +58,14 @@ extension FluidStaggeredGridView on StaggeredGridView {
 }
 
 extension SliverFluidStaggeredGrid on SliverStaggeredGrid {
-  static Widget fluid({List<BreakpointColumn> children, double spacing}) {
-    return Builder(builder: (context) =>
-      SliverStaggeredGrid.count(
+  static SliverStaggeredGrid fluid({BuildContext context, List<BreakpointColumn> children, double spacing}) {
+    return SliverStaggeredGrid.count(
       crossAxisCount: 12,
       children: children,
       staggeredTiles:children.map((child) => child._tile).toList(),
           mainAxisSpacing: spacing ?? defaultSpacing(context),
           crossAxisSpacing: spacing ?? defaultSpacing(context)
-    ));
+    );
   }
 }
 
