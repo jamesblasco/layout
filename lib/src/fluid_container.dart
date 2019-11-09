@@ -5,12 +5,13 @@ import 'fluid_layout.dart';
 
 class Fluid extends StatelessWidget {
   final Widget child;
-  const Fluid({Key key, this.child}) : super(key: key);
+  final double horizontalPadding;
+  const Fluid({Key key, this.child, this.horizontalPadding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: FluidLayout.of(context).fluidPadding),
+      padding: EdgeInsets.symmetric(horizontal: FluidLayout.of(context).fluidPadding + horizontalPadding),
       child: child,
     );
   }
@@ -18,16 +19,18 @@ class Fluid extends StatelessWidget {
 }
 
 class SliverFluid extends SingleChildRenderObjectWidget {
+  final double horizontalPadding;
   const SliverFluid({
     Key key,
     Widget sliver,
+    this.horizontalPadding = 0,
   }) : super(key: key, child: sliver);
 
   @override
   RenderSliverPadding createRenderObject(BuildContext context) {
     return RenderSliverPadding(
       padding: EdgeInsets.symmetric(
-          horizontal: FluidLayout.of(context).fluidPadding),
+          horizontal: FluidLayout.of(context).fluidPadding + horizontalPadding),
       textDirection: Directionality.of(context),
     );
   }
