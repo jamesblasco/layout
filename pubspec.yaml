@@ -1,6 +1,6 @@
 name: fluid_layout
 description: Fluid layout
-version: 0.0.2
+version: 0.0.3
 homepage: 'https://github.com/jamesblasco/fluid_layout'
 
 environment:
@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_staggered_grid_view: ^0.3.0
 
 dev_dependencies:
   flutter_test:

@@ -42,7 +42,9 @@ class FluidLayoutData extends InheritedWidget {
     Widget child,
   })  : fluidBreakpoint = FluidBreakpointsHelper.from(containerWidth),
         fluidWidth = calculateFluidWidth(containerWidth),
-        super(key: key, child: child);
+        super(key: key, child: child) {
+    print('$fluidBreakpoint, $fluidWidth');
+  }
 
   @override
   bool updateShouldNotify(FluidLayoutData oldWidget) {

@@ -79,4 +79,25 @@ extension FluidBreakpointsHelper on FluidBreakpoint {
     }
     return null;
   }
+
+  bool get isXs => FluidBreakpoint.xs == this;
+  bool get isS => FluidBreakpoint.s == this;
+  bool get isM=> FluidBreakpoint.m == this;
+  bool get isL=> FluidBreakpoint.l == this;
+  bool get isXl=> FluidBreakpoint.xl == this;
+
+  bool isLargerThan(FluidBreakpoint breakpoint) => breakpoint.index < this.index;
+  bool get isLargerThanXs => this.isLargerThan(FluidBreakpoint.xs);
+  bool get isLargerThanS => this.isLargerThan(FluidBreakpoint.s);
+  bool get isLargerThanM => this.isLargerThan(FluidBreakpoint.m);
+  bool get isLargerThanL => this.isLargerThan(FluidBreakpoint.l);
+  bool get isLargerThanXl => this.isLargerThan(FluidBreakpoint.xl);
+
+
+  bool isSmallerThan(FluidBreakpoint breakpoint) => breakpoint.index > this.index;
+  bool get isSmallerThanXs => this.isSmallerThan(FluidBreakpoint.xs);
+  bool get isSmallerThanS => this.isSmallerThan(FluidBreakpoint.s);
+  bool get isSmallerThanM => this.isSmallerThan(FluidBreakpoint.m);
+  bool get isSmallerThanL => this.isSmallerThan(FluidBreakpoint.l);
+  bool get isSmallerThanXl => this.isSmallerThan(FluidBreakpoint.xl);
 }
