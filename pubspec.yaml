@@ -1,10 +1,10 @@
 name: fluid_layout
 description: Fluid layout
-version: 0.0.1
-homepage: 'https://google.com'
+version: 0.0.2
+homepage: 'https://github.com/jamesblasco/fluid_layout'
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
