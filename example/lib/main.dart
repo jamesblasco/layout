@@ -1,6 +1,9 @@
+import 'package:example/sliver_example.dart';
 import 'package:fluid_layout/fluid_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import 'custom_card.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,8 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
+          cardTheme: CardTheme(
+              elevation: 12,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12))),
+
           // This is the theme of your application.
           //
           // Try running your application with "flutter run". You'll see the
@@ -30,15 +39,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -62,110 +62,226 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: FluidLayout(
-        child: Builder(builder: (context)=>
-         Fluid(
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Container(color: Colors.grey),
-            FluidStaggeredGridView.fluid(
-              children: [
-                BreakpointColumn.extent(
-                  crossAxisCellCount: FluidLayout.of(context).fluidBreakpoint.isLargerThanM ? 3 : 6,
-            mainAxisExtent: 40,
-            child:
-                Container(
-                    color: Colors.green,
-                    child: new Center(
-                      child: new CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: new Text('Try'),
+          child: Builder(
+              builder: (context) => CustomScrollView(
+                    slivers: <Widget>[
+                      SliverToBoxAdapter(
+                          child: SizedBox(
+                              height: context.fluid(60, xs: 12, s: 12))),
+                      SliverFluid(
+                        sliver: SliverFluidGrid(
+                          children: [
+                            if (context.breakpoint.isSmallerThanM)
+                              BreakpointColumn.fit(
+                                  crossAxisCellCount: context.fluid(12),
+                                  child: CustomCard(
+                                      child: Container(
+                                    height: 100,
+                                    child: Center(
+                                        child: Text(
+                                            'Only visible in small screens')),
+                                  ))),
+                            BreakpointColumn.count(
+                                crossAxisCellCount: context.fluid(12),
+                                mainAxisCellCount: context.fluid(4),
+                                child: CustomCard(
+                                  color: Colors.green,
+                                  child: Center(child: Text('Header')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
+                                child: CustomCard(
+                                  child: Center(child: Text('A')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount: context.fluid(3, m: 3, s: 4, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('B')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
+                                child: CustomCard(
+                                  child: Center(child: Text('C')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount: context.fluid(3, m: 3, s: 4, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('D')),
+                                )),
+                            BreakpointColumn.extent(
+                                crossAxisCellCount: context.fluid(12),
+                                mainAxisExtent: 1,
+                                child: Container(
+                                  color: Colors.black12,
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 6, s: 12, xs: 12),
+                                mainAxisCellCount: 3,
+                                child: CustomCard(
+                                  color: Colors.green,
+                                  child: Center(child: Text('1')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 6, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(1.45, s: 2, xs: 2),
+                                child: CustomCard(
+                                  child: Center(child: Text('2')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 6, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(1.45, s: 2, xs: 2),
+                                child: CustomCard(
+                                  child: Center(child: Text('3')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 6, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(1.45, s: 2, xs: 2),
+                                child: CustomCard(
+                                  child: Center(child: Text('4')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 6, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(1.45, s: 2, xs: 2),
+                                child: CustomCard(
+                                  child: Center(child: Text('5')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 6, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(1.45, s: 2, xs: 2),
+                                child: CustomCard(
+                                  child: Center(child: Text('6')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 6, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(1.45, s: 2, xs: 2),
+                                child: CustomCard(
+                                  child: Center(child: Text('7')),
+                                )),
+                            BreakpointColumn.extent(
+                                crossAxisCellCount: 12,
+                                mainAxisExtent: 150,
+                                child: CustomCard(
+                                  color: Colors.green,
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                                mainAxisCellCount:
+                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('I')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                                mainAxisCellCount:
+                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('I')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                                mainAxisCellCount:
+                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('I')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                                mainAxisCellCount:
+                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('I')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                                mainAxisCellCount:
+                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('I')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                                mainAxisCellCount:
+                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                                child: CustomCard(
+                                  child: Center(child: Text('I')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(4, s: 12, xs: 12),
+                                mainAxisCellCount:
+                                    context.fluid(4, s: 12, xs: 12),
+                                child: CustomCard(
+                                  child: Center(child: Text('A')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(4, s: 12, xs: 12),
+                                mainAxisCellCount:
+                                    context.fluid(4, s: 12, xs: 12),
+                                child: CustomCard(
+                                  child: Center(child: Text('B')),
+                                )),
+                            BreakpointColumn.count(
+                                crossAxisCellCount:
+                                    context.fluid(4, s: 12, xs: 12),
+                                mainAxisCellCount:
+                                    context.fluid(4, s: 12, xs: 12),
+                                child: CustomCard(
+                                  child: Center(child: Text('C')),
+                                )),
+                          ],
+                        ),
                       ),
-                    )),),
-                BreakpointColumn.extent(
-                  crossAxisCellCount: FluidLayout.of(context).fluidBreakpoint.isLargerThanM ? 3 : 6,
-                  mainAxisExtent: 40,
-                  child:
-                  Container(
-                      color: Colors.green,
-                      child: new Center(
-                        child: new CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: new Text('Try'),
+                      SliverToBoxAdapter(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 12),
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          color: Colors.green,
+                          height: 200,
+                          child: Center(child: Text('Expanded')),
                         ),
-                      )),),
-                BreakpointColumn.extent(
-                  crossAxisCellCount: FluidLayout.of(context).fluidBreakpoint.isLargerThanM ? 3 : 6,
-                  mainAxisExtent: 40,
-                  child:
-                  Container(
-                      color: Colors.green,
-                      child: new Center(
-                        child: new CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: new Text('Try'),
-                        ),
-                      )),),
-                BreakpointColumn.extent(
-                  crossAxisCellCount: FluidLayout.of(context).fluidBreakpoint.isLargerThanM ? 3 : 6,
-                  mainAxisExtent: 40,
-                  child:
-                  Container(
-                      color: Colors.green,
-                      child: new Center(
-                        child: new CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: new Text('Try'),
-                        ),
-                      )),),
-              ],
-            ),
-            Center(
-              // Center is a layout widget. It takes a single child and positions it
-              // in the middle of the parent.
-              child: Column(
-                // Column is also a layout widget. It takes a list of children and
-                // arranges them vertically. By default, it sizes itself to fit its
-                // children horizontally, and tries to be as tall as its parent.
-                //
-                // Invoke "debug painting" (press "p" in the console, choose the
-                // "Toggle Debug Paint" action from the Flutter Inspector in Android
-                // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-                // to see the wireframe for each widget.
-                //
-                // Column has various properties to control how it sizes itself and
-                // how it positions its children. Here we use mainAxisAlignment to
-                // center the children vertically; the main axis here is the vertical
-                // axis because Columns are vertical (the cross axis would be
-                // horizontal).
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.display1,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ))),
+                      ),
+                      SliverToBoxAdapter(child: SizedBox(height: 40)),
+                      context.breakpoint.isLargerThanM
+                          ? SliverFluid(
+                              sliver: SliverToBoxAdapter(
+                                  child: CustomCard(
+                                      child: Container(
+                                height: 300,
+                                child: Center(
+                                    child:
+                                        Text('Only visible in large screen')),
+                              ))),
+                            )
+                          : SliverToBoxAdapter(child: Container()),
+                      SliverToBoxAdapter(child: SizedBox(height: 40)),
+                    ],
+                  ))),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
