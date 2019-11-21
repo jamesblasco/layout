@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,5 +16,4 @@ class CustomCard extends StatelessWidget {
       elevation: 12,
     );
   }
-
 }

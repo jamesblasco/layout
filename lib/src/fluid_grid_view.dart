@@ -83,7 +83,7 @@ class SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
                 addAutomaticKeepAlives: true));
 
   /// The delegate that controls the size and position of the children.
-  SliverStaggeredGridDelegate  gridDelegate(BuildContext context) =>
+  SliverStaggeredGridDelegate gridDelegate(BuildContext context) =>
       SliverStaggeredGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 12,
         mainAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context),
@@ -96,8 +96,7 @@ class SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
   RenderSliverStaggeredGrid createRenderObject(BuildContext context) {
     final SliverVariableSizeBoxAdaptorElement element = context;
     return new RenderSliverStaggeredGrid(
-        childManager: element,
-        gridDelegate: gridDelegate(context));
+        childManager: element, gridDelegate: gridDelegate(context));
   }
 
   @override
@@ -123,4 +122,3 @@ class SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
     );
   }
 }
-

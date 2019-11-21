@@ -91,26 +91,34 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Center(child: Text('Header')),
                                 )),
                             BreakpointColumn.count(
-                                crossAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(3, m: 3, s: 6, xs: 6),
                                 child: CustomCard(
                                   child: Center(child: Text('A')),
                                 )),
                             BreakpointColumn.count(
-                                crossAxisCellCount:context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount: context.fluid(3, m: 3, s: 4, xs: 4),
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(3, m: 3, s: 4, xs: 4),
                                 child: CustomCard(
                                   child: Center(child: Text('B')),
                                 )),
                             BreakpointColumn.count(
-                                crossAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(3, m: 3, s: 6, xs: 6),
                                 child: CustomCard(
                                   child: Center(child: Text('C')),
                                 )),
                             BreakpointColumn.count(
-                                crossAxisCellCount: context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount: context.fluid(3, m: 3, s: 4, xs: 4),
+                                crossAxisCellCount:
+                                    context.fluid(3, m: 3, s: 6, xs: 6),
+                                mainAxisCellCount:
+                                    context.fluid(3, m: 3, s: 4, xs: 4),
                                 child: CustomCard(
                                   child: Center(child: Text('D')),
                                 )),

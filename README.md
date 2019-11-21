@@ -3,7 +3,7 @@
 
 ![Fluid gif][]
 
-Fluid layout allows you to create responsive layout for
+Fluid layouts allows you to create responsive layout for
 mobile, web and desktop from a single codebase.
 
 

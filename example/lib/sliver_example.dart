@@ -53,7 +53,8 @@ class _MyHomePageState extends State<MySecondPage> {
         builder: (context) => CustomScrollView(
           slivers: [
             //Container(color: Colors.grey),
-           SliverFluid(sliver: SliverFluidGrid(
+            SliverFluid(
+                sliver: SliverFluidGrid(
               children: [
                 BreakpointColumn.extent(
                   crossAxisCellCount:

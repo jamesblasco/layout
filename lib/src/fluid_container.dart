@@ -1,4 +1,3 @@
-
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'fluid_layout.dart';
@@ -10,13 +9,14 @@ class Fluid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double innerPadding = (horizontalPadding ??  FluidLayout.of(context).horizontalPadding);
+    double innerPadding =
+        (horizontalPadding ?? FluidLayout.of(context).horizontalPadding);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: FluidLayout.of(context).fluidPadding + innerPadding),
+      padding: EdgeInsets.symmetric(
+          horizontal: FluidLayout.of(context).fluidPadding + innerPadding),
       child: child,
     );
   }
-
 }
 
 class SliverFluid extends SingleChildRenderObjectWidget {
@@ -24,15 +24,17 @@ class SliverFluid extends SingleChildRenderObjectWidget {
   const SliverFluid({
     Key key,
     Widget sliver,
-    this.horizontalPadding ,
+    this.horizontalPadding,
   }) : super(key: key, child: sliver);
 
   @override
   RenderSliverPadding createRenderObject(BuildContext context) {
-    double innerPadding = (horizontalPadding ??  FluidLayout.of(context).horizontalPadding);
+    double innerPadding =
+        (horizontalPadding ?? FluidLayout.of(context).horizontalPadding);
     return RenderSliverPadding(
       padding: EdgeInsets.symmetric(
-          horizontal: (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding),
+          horizontal:
+              (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding),
       textDirection: Directionality.of(context),
     );
   }
@@ -40,10 +42,12 @@ class SliverFluid extends SingleChildRenderObjectWidget {
   @override
   void updateRenderObject(
       BuildContext context, RenderSliverPadding renderObject) {
-    double innerPadding = (horizontalPadding ??  FluidLayout.of(context).horizontalPadding);
+    double innerPadding =
+        (horizontalPadding ?? FluidLayout.of(context).horizontalPadding);
     renderObject
       ..padding = EdgeInsets.symmetric(
-          horizontal: (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding)
+          horizontal:
+              (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding)
       ..textDirection = Directionality.of(context);
   }
 

@@ -4,8 +4,6 @@ import 'package:fluid_layout/fluid_layout.dart';
 import 'package:fluid_layout/src/fluid_breakpoint.dart';
 import 'package:flutter/widgets.dart';
 
-
-
 class FluidLayout extends StatefulWidget {
   static FluidLayoutData of(BuildContext context) =>
       context.inheritFromWidgetOfExactType(FluidLayoutData) as FluidLayoutData;
@@ -34,7 +32,9 @@ class _FluidLayoutState extends State<FluidLayout> {
           containerWidth: containerWidth,
           fluidWidth: (widget.width ?? _defaultFluidWidth)
               .buildFromWidth(containerWidth),
-          horizontalPadding: (widget.horizontalPadding ?? defaultHorizontalSpacing).buildFromWidth(containerWidth),
+          horizontalPadding:
+              (widget.horizontalPadding ?? defaultHorizontalSpacing)
+                  .buildFromWidth(containerWidth),
           fluidBreakpoint: FluidBreakpointsHelper.from(containerWidth));
     });
   }
@@ -53,7 +53,8 @@ class FluidLayoutData extends InheritedWidget {
       this.fluidWidth,
       Widget child,
       this.horizontalPadding,
-      this.fluidBreakpoint}) : super(key : key, child: child );
+      this.fluidBreakpoint})
+      : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(FluidLayoutData oldWidget) {

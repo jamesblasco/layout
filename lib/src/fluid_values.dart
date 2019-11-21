@@ -10,16 +10,19 @@ extension FluidContext on BuildContext {
 }
 
 class FluidValue<T> {
-  final T Function(double containerWidth)  valueBuilder;
+  final T Function(double containerWidth) valueBuilder;
   FluidValue(this.valueBuilder);
   T build(BuildContext context) => FluidValue.fluid(context, valueBuilder);
-  T buildFromWidth(double containerWidth) => FluidValue.fromWidth(containerWidth, valueBuilder);
+  T buildFromWidth(double containerWidth) =>
+      FluidValue.fromWidth(containerWidth, valueBuilder);
 
-  static T fromWidth<T>(double containerWidth, T Function(double containerWidth)  valueBuilder) {
+  static T fromWidth<T>(
+      double containerWidth, T Function(double containerWidth) valueBuilder) {
     return valueBuilder(containerWidth);
   }
 
-  static T fluid<T>(BuildContext context, T Function(double containerWidth)  valueBuilder,
+  static T fluid<T>(
+      BuildContext context, T Function(double containerWidth) valueBuilder,
       {T xs, T s, T m, T l, T xl}) {
     final containerWidth = FluidLayout.of(context).containerWidth;
     return valueBuilder(containerWidth);
@@ -28,7 +31,8 @@ class FluidValue<T> {
   static T breakpoint<T>(BuildContext context, T value,
       {T xs, T s, T m, T l, T xl}) {
     final breakpoint = FluidLayout.of(context).fluidBreakpoint;
-    return breakpointWithoutContext(breakpoint, value, xs: xs, s:s, m: m, l: l, xl: xl);
+    return breakpointWithoutContext(breakpoint, value,
+        xs: xs, s: s, m: m, l: l, xl: xl);
   }
 
   static T breakpointWithoutContext<T>(FluidBreakpoint breakpoint, T value,
@@ -48,4 +52,3 @@ class FluidValue<T> {
     return value;
   }
 }
-
