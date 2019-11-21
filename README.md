@@ -1,14 +1,11 @@
-# fluid_layout
+# Fluid Layout
+[![pub package](https://img.shields.io/pub/v/fluid_layout.svg)](https://pub.dev/packages/fluid_layout)   
 
-Fluid layout
+![Fluid gif][]
 
-## Getting Started
+Fluid layout allows you to create responsive layout for
+mobile, web and desktop from a single codebase.
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+[Fluid gif]: https://github.com/jamesblasco/fluid_layout/blob/master/fluid.gif?raw=true
+
