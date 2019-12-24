@@ -23,7 +23,7 @@ Based in the boostrap approach, `FluidLayout` calculates a padding content (flui
 
 The screen sizes are divided in 6 breakpoints: **xs, s, m, l, xl**, and can be accessed through `FluidLayout.of(context).fluidBreakpoint` or `context.breakpoint. 
 
-You can create values for diferrent screen sizes thanks to the class `FluidValue`. The easiest way is:
+You can create values(int, num, objects, functions, ... whatever variable type) for diferrent screen sizes thanks to the class `FluidValue`. The easiest way is:
 ```dart
 final value = context.fluid(defaultValue, 
   xs: xsValue,  //if null xs would be defaultValue
