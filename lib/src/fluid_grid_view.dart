@@ -4,36 +4,38 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class BreakpointColumn extends StatelessWidget {
-  final int crossAxisCellCount;
-  final num mainAxisCellCount;
-  final double mainAxisExtent;
-
+class FluidCell extends StatelessWidget {
+  final int size;
+  final num heightSize;
+  final double height;
   final Widget child;
 
-  const BreakpointColumn.fit(
-      {Key key, @required this.crossAxisCellCount, this.child})
-      : assert(crossAxisCellCount != null && crossAxisCellCount >= 0),
-        mainAxisCellCount = null,
-        mainAxisExtent = null,
+  const FluidCell.fit(
+      {Key key, @required this.size, this.child})
+      : assert(size != null && size >= 0),
+        assert(size <= 12, 'The size value $size is not valid. Maximum number of columns is 12'),
+        heightSize = null,
+        height = null,
         super(key: key);
 
-  const BreakpointColumn.extent(
+  const FluidCell.withFixedHeight(
       {Key key,
-      @required this.crossAxisCellCount,
-      @required this.mainAxisExtent,
+      @required this.size,
+      @required this.height,
       this.child})
-      : assert(crossAxisCellCount != null && crossAxisCellCount >= 0),
-        mainAxisCellCount = null,
+      : assert(size != null && size >= 0),
+        assert(size <= 12, 'The size value $size is not valid. Maximum number of columns is 12'),
+        heightSize = null,
         super(key: key);
 
-  const BreakpointColumn.count(
+  const FluidCell.withFluidHeight(
       {Key key,
-      @required this.crossAxisCellCount,
-      @required this.mainAxisCellCount,
+      @required this.size,
+      @required this.heightSize,
       this.child})
-      : assert(crossAxisCellCount != null && crossAxisCellCount >= 0),
-        mainAxisExtent = null,
+      : assert(size != null && size >= 0),
+        assert(size <= 12, 'The size value $size is not valid. Maximun number of columns is 12'),
+        height = null,
         super(key: key);
 
   @override
@@ -42,50 +44,85 @@ class BreakpointColumn extends StatelessWidget {
   }
 
   StaggeredTile get _tile {
-    if (mainAxisCellCount == null && mainAxisExtent == null) {
-      return StaggeredTile.fit(crossAxisCellCount);
-    } else if (mainAxisCellCount == null) {
-      return StaggeredTile.extent(crossAxisCellCount, mainAxisExtent);
+    if (heightSize == null && height == null) {
+      return StaggeredTile.fit(size);
+    } else if (heightSize == null) {
+      return StaggeredTile.extent(size, height);
     } else {
-      return StaggeredTile.count(crossAxisCellCount, mainAxisCellCount);
+      return StaggeredTile.count(size, heightSize);
     }
   }
 }
 
 class FluidGridView extends StatelessWidget {
-  final List<BreakpointColumn> children;
+  final List<FluidCell> children;
   final double spacing;
   final bool shrinkWrap;
   final ScrollPhysics physics;
-  final EdgeInsets padding;
+  final EdgeInsets innerPadding;
+  final bool fluid;
+  final double horizontalPadding;
 
-  FluidGridView({this.children, this.spacing, this.shrinkWrap = false, this.physics, this.padding = EdgeInsets.zero});
+  FluidGridView(
+      {this.children,
+      this.spacing,
+      this.shrinkWrap = false,
+      this.physics,
+      this.innerPadding = EdgeInsets.zero,
+      this.fluid,
+      this.horizontalPadding});
 
   @override
   Widget build(BuildContext context) {
-    return StaggeredGridView.count(
-        crossAxisCount: 12,
-        padding: padding,
-        children: children,
-        shrinkWrap: shrinkWrap,
-        physics: physics,
-        staggeredTiles: children.map((child) => child._tile).toList(),
-        mainAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context),
-        crossAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context));
+    return Fluid(
+        horizontalPadding: horizontalPadding,
+        fluid: fluid,
+        child: StaggeredGridView.count(
+            crossAxisCount: 12,
+            padding: innerPadding,
+            children: children,
+            shrinkWrap: shrinkWrap,
+            physics: physics,
+            staggeredTiles: children.map((child) => child._tile).toList(),
+            mainAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context),
+            crossAxisSpacing:
+                spacing ?? defaultHorizontalSpacing.build(context)));
   }
 }
 
-class SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
+class SliverFluidGrid extends SliverFluid {
+  final double horizontalPadding;
+  final bool fluid;
   final double spacing;
-  final List<BreakpointColumn> children;
+  final List<FluidCell> children;
 
-  SliverFluidGrid( {
+  SliverFluidGrid({
     Key key,
+    this.fluid,
+    this.horizontalPadding,
     this.spacing,
-    this.children: const <BreakpointColumn>[],
+    this.children: const <FluidCell>[],
   }) : super(
             key: key,
-            delegate: new SliverChildListDelegate(children,
+            fluid: fluid,
+            horizontalPadding: horizontalPadding,
+            sliver: _SliverFluidGrid(
+              spacing: spacing,
+              children: children,
+            ));
+}
+
+class _SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
+  final double spacing;
+  final List<FluidCell> children;
+
+  _SliverFluidGrid({
+    Key key,
+    this.spacing,
+    this.children: const <FluidCell>[],
+  }) : super(
+            key: key,
+            delegate: SliverChildListDelegate(children,
                 addAutomaticKeepAlives: true));
 
   /// The delegate that controls the size and position of the children.

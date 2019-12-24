@@ -56,12 +56,12 @@ class _MyHomePageState extends State<MySecondPage> {
             SliverFluid(
                 sliver: SliverFluidGrid(
               children: [
-                BreakpointColumn.extent(
-                  crossAxisCellCount:
+                FluidCell.withFixedHeight(
+                  size:
                       FluidLayout.of(context).fluidBreakpoint.isLargerThanM
                           ? 3
                           : 6,
-                  mainAxisExtent: 40,
+                  height: 40,
                   child: Container(
                       color: Colors.green,
                       child: new Center(
@@ -71,12 +71,12 @@ class _MyHomePageState extends State<MySecondPage> {
                         ),
                       )),
                 ),
-                BreakpointColumn.extent(
-                  crossAxisCellCount:
+                FluidCell.withFixedHeight(
+                  size:
                       FluidLayout.of(context).fluidBreakpoint.isLargerThanM
                           ? 3
                           : 6,
-                  mainAxisExtent: 40,
+                  height: 40,
                   child: Container(
                       color: Colors.green,
                       child: new Center(
@@ -86,12 +86,12 @@ class _MyHomePageState extends State<MySecondPage> {
                         ),
                       )),
                 ),
-                BreakpointColumn.extent(
-                  crossAxisCellCount:
+                FluidCell.withFixedHeight(
+                  size:
                       FluidLayout.of(context).fluidBreakpoint.isLargerThanM
                           ? 3
                           : 6,
-                  mainAxisExtent: 40,
+                  height: 40,
                   child: Container(
                       color: Colors.green,
                       child: new Center(
@@ -101,12 +101,12 @@ class _MyHomePageState extends State<MySecondPage> {
                         ),
                       )),
                 ),
-                BreakpointColumn.extent(
-                  crossAxisCellCount:
+                FluidCell.withFixedHeight(
+                  size:
                       FluidLayout.of(context).fluidBreakpoint.isLargerThanM
                           ? 3
                           : 6,
-                  mainAxisExtent: 40,
+                  height: 40,
                   child: Container(
                       color: Colors.green,
                       child: new Center(

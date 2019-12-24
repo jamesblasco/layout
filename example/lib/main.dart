@@ -44,10 +44,9 @@ class MyApp extends StatelessWidget {
         '/columnlayout': (_) => ColumnsFluidLayout(),
         '/complexcolumnlayout': (_) => ComplexColumnsFluidLayout(),
         '/conditionallayout': (_) => ConditionalFluidLayout(),
-        '/layout_with_horizontal_scrolling': (_) => FluidLayoutWithHorizontalScroll(),
+        '/layout_with_horizontal_scrolling': (_) =>
+            FluidLayoutWithHorizontalScroll(),
         '/fullexample': (_) => MyHomePage(title: 'Full example'),
-
-
       },
     );
   }
@@ -69,99 +68,101 @@ class HomePage extends StatelessWidget {
                             'Fluid Layout examples',
                             style: Theme.of(context).textTheme.title,
                           )))),
-              SliverFluid(
-                sliver: SliverFluidGrid(children: [
-                  BreakpointColumn.fit(
-                    crossAxisCellCount:
-                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
-                    child: CustomCard(
-                      onTap: () =>
-                          Navigator.of(context).pushNamed('/basiclayout'),
-                      child: Container(
-                        height: 100,
-                        child: Center(child: Text('Basic fluid layout', textAlign: TextAlign.center)),
-                      ),
+              SliverFluidGrid(children: [
+                FluidCell.fit(
+                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  child: CustomCard(
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/basiclayout'),
+                    child: Container(
+                      height: 100,
+                      child: Center(
+                          child: Text('Basic fluid layout',
+                              textAlign: TextAlign.center)),
                     ),
                   ),
-                  BreakpointColumn.fit(
-                    crossAxisCellCount:
-                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
-                    child: CustomCard(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed('/full_width_rows_layout'),
-                      child: Container(
-                        height: 100,
-                        child: Center(
-                            child: Text('Fluid Layout with full width rows', textAlign: TextAlign.center)),
-                      ),
+                ),
+                FluidCell.fit(
+                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  child: CustomCard(
+                    onTap: () => Navigator.of(context)
+                        .pushNamed('/full_width_rows_layout'),
+                    child: Container(
+                      height: 100,
+                      child: Center(
+                          child: Text('Fluid Layout with full width rows',
+                              textAlign: TextAlign.center)),
                     ),
                   ),
-                  BreakpointColumn.fit(
-                    crossAxisCellCount:
-                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
-                    child: CustomCard(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed('/columnlayout'),
-                      child: Container(
-                        height: 100,
-                        child: Center(
-                            child: Text('Column Fluid Layout', textAlign: TextAlign.center)),
-                      ),
+                ),
+                FluidCell.fit(
+                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  child: CustomCard(
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/columnlayout'),
+                    child: Container(
+                      height: 100,
+                      child: Center(
+                          child: Text('Column Fluid Layout',
+                              textAlign: TextAlign.center)),
                     ),
                   ),
-                  BreakpointColumn.fit(
-                    crossAxisCellCount:
-                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
-                    child: CustomCard(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed('/complexcolumnlayout'),
-                      child: Container(
-                        height: 100,
-                        child: Center(
-                            child: Text('Complex Fluid Layout', textAlign: TextAlign.center)),
-                      ),
+                ),
+                FluidCell.fit(
+                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  child: CustomCard(
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/complexcolumnlayout'),
+                    child: Container(
+                      height: 100,
+                      child: Center(
+                          child: Text('Complex Fluid Layout',
+                              textAlign: TextAlign.center)),
                     ),
                   ),
-                  BreakpointColumn.fit(
-                    crossAxisCellCount:
-                    context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
-                    child: CustomCard(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed('/conditionallayout'),
-                      child: Container(
-                        height: 100,
-                        child: Center(
-                            child: Text('Conditional Fluid Layout', textAlign: TextAlign.center,)),
-                      ),
+                ),
+                FluidCell.fit(
+                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  child: CustomCard(
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/conditionallayout'),
+                    child: Container(
+                      height: 100,
+                      child: Center(
+                          child: Text(
+                        'Conditional Fluid Layout',
+                        textAlign: TextAlign.center,
+                      )),
                     ),
                   ),
-                  BreakpointColumn.fit(
-                    crossAxisCellCount:
-                    context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
-                    child: CustomCard(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed('/layout_with_horizontal_scrolling'),
-                      child: Container(
-                        height: 100,
-                        child: Center(
-                            child: Text('Fluid Layout with horizontal scrolling', textAlign: TextAlign.center)),
-                      ),
+                ),
+                FluidCell.fit(
+                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  child: CustomCard(
+                    onTap: () => Navigator.of(context)
+                        .pushNamed('/layout_with_horizontal_scrolling'),
+                    child: Container(
+                      height: 100,
+                      child: Center(
+                          child: Text('Fluid Layout with horizontal scrolling',
+                              textAlign: TextAlign.center)),
                     ),
                   ),
-                  BreakpointColumn.fit(
-                    crossAxisCellCount:
-                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
-                    child: CustomCard(
-                      onTap: () =>
-                          Navigator.of(context).pushNamed('/fullexample'),
-                      child: Container(
-                        height: 100,
-                        child: Center(child: Text('Full example', textAlign: TextAlign.center)),
-                      ),
+                ),
+                FluidCell.fit(
+                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  child: CustomCard(
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/fullexample'),
+                    child: Container(
+                      height: 100,
+                      child: Center(
+                          child: Text('Full example',
+                              textAlign: TextAlign.center)),
                     ),
-                  )
-                ]),
-              )
+                  ),
+                )
+              ]),
             ],
           ),
         ),
@@ -203,200 +204,198 @@ class _MyHomePageState extends State<MyHomePage> {
                       SliverToBoxAdapter(
                           child: SizedBox(
                               height: context.fluid(60, xs: 12, s: 12))),
-                      SliverFluid(
-                        sliver: SliverFluidGrid(
-                          children: [
-                            if (context.breakpoint.isSmallerThanM)
-                              BreakpointColumn.fit(
-                                  crossAxisCellCount: context.fluid(12),
-                                  child: CustomCard(
-                                      child: Container(
-                                    height: 100,
-                                    child: Center(
-                                        child: Text(
-                                            'Only visible in small screens')),
-                                  ))),
-                            BreakpointColumn.count(
-                                crossAxisCellCount: context.fluid(12),
-                                mainAxisCellCount: context.fluid(4),
+                      SliverFluidGrid(
+                        children: [
+                          if (context.breakpoint.isSmallerThanM)
+                            FluidCell.fit(
+                                size: context.fluid(12),
                                 child: CustomCard(
-                                  color: Colors.green,
-                                  child: Center(child: Text('Header')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(3, m: 3, s: 6, xs: 6),
-                                child: CustomCard(
-                                  child: Center(child: Text('A')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(3, m: 3, s: 4, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('B')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(3, m: 3, s: 6, xs: 6),
-                                child: CustomCard(
-                                  child: Center(child: Text('C')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 3, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(3, m: 3, s: 4, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('D')),
-                                )),
-                            BreakpointColumn.extent(
-                                crossAxisCellCount: context.fluid(12),
-                                mainAxisExtent: 1,
-                                child: Container(
-                                  color: Colors.black12,
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 6, s: 12, xs: 12),
-                                mainAxisCellCount: 3,
-                                child: CustomCard(
-                                  color: Colors.green,
-                                  child: Center(child: Text('1')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 6, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(1.45, s: 2, xs: 2),
-                                child: CustomCard(
-                                  child: Center(child: Text('2')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 6, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(1.45, s: 2, xs: 2),
-                                child: CustomCard(
-                                  child: Center(child: Text('3')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 6, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(1.45, s: 2, xs: 2),
-                                child: CustomCard(
-                                  child: Center(child: Text('4')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 6, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(1.45, s: 2, xs: 2),
-                                child: CustomCard(
-                                  child: Center(child: Text('5')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 6, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(1.45, s: 2, xs: 2),
-                                child: CustomCard(
-                                  child: Center(child: Text('6')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(3, m: 6, s: 6, xs: 6),
-                                mainAxisCellCount:
-                                    context.fluid(1.45, s: 2, xs: 2),
-                                child: CustomCard(
-                                  child: Center(child: Text('7')),
-                                )),
-                            BreakpointColumn.extent(
-                                crossAxisCellCount: 12,
-                                mainAxisExtent: 150,
-                                child: CustomCard(
-                                  color: Colors.green,
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                                mainAxisCellCount:
-                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('I')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                                mainAxisCellCount:
-                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('I')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                                mainAxisCellCount:
-                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('I')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                                mainAxisCellCount:
-                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('I')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                                mainAxisCellCount:
-                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('I')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                                mainAxisCellCount:
-                                    context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
-                                child: CustomCard(
-                                  child: Center(child: Text('I')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(4, s: 12, xs: 12),
-                                mainAxisCellCount:
-                                    context.fluid(4, s: 12, xs: 12),
-                                child: CustomCard(
-                                  child: Center(child: Text('A')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(4, s: 12, xs: 12),
-                                mainAxisCellCount:
-                                    context.fluid(4, s: 12, xs: 12),
-                                child: CustomCard(
-                                  child: Center(child: Text('B')),
-                                )),
-                            BreakpointColumn.count(
-                                crossAxisCellCount:
-                                    context.fluid(4, s: 12, xs: 12),
-                                mainAxisCellCount:
-                                    context.fluid(4, s: 12, xs: 12),
-                                child: CustomCard(
-                                  child: Center(child: Text('C')),
-                                )),
-                          ],
-                        ),
+                                    child: Container(
+                                  height: 100,
+                                  child: Center(
+                                      child: Text(
+                                          'Only visible in small screens')),
+                                ))),
+                          FluidCell.withFluidHeight(
+                              size: context.fluid(12),
+                              heightSize: context.fluid(4),
+                              child: CustomCard(
+                                color: Colors.green,
+                                child: Center(child: Text('Header')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 3, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(3, m: 3, s: 6, xs: 6),
+                              child: CustomCard(
+                                child: Center(child: Text('A')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 3, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(3, m: 3, s: 4, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('B')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 3, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(3, m: 3, s: 6, xs: 6),
+                              child: CustomCard(
+                                child: Center(child: Text('C')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 3, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(3, m: 3, s: 4, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('D')),
+                              )),
+                          FluidCell.withFixedHeight(
+                              size: context.fluid(12),
+                              height: 1,
+                              child: Container(
+                                color: Colors.black12,
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 6, s: 12, xs: 12),
+                              heightSize: 3,
+                              child: CustomCard(
+                                color: Colors.green,
+                                child: Center(child: Text('1')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 6, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(1.45, s: 2, xs: 2),
+                              child: CustomCard(
+                                child: Center(child: Text('2')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 6, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(1.45, s: 2, xs: 2),
+                              child: CustomCard(
+                                child: Center(child: Text('3')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 6, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(1.45, s: 2, xs: 2),
+                              child: CustomCard(
+                                child: Center(child: Text('4')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 6, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(1.45, s: 2, xs: 2),
+                              child: CustomCard(
+                                child: Center(child: Text('5')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 6, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(1.45, s: 2, xs: 2),
+                              child: CustomCard(
+                                child: Center(child: Text('6')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(3, m: 6, s: 6, xs: 6),
+                              heightSize:
+                                  context.fluid(1.45, s: 2, xs: 2),
+                              child: CustomCard(
+                                child: Center(child: Text('7')),
+                              )),
+                          FluidCell.withFixedHeight(
+                              size: 12,
+                              height: 150,
+                              child: CustomCard(
+                                color: Colors.green,
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                              heightSize:
+                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('I')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                              heightSize:
+                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('I')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                              heightSize:
+                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('I')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                              heightSize:
+                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('I')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                              heightSize:
+                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('I')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
+                              heightSize:
+                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              child: CustomCard(
+                                child: Center(child: Text('I')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(4, s: 12, xs: 12),
+                              heightSize:
+                                  context.fluid(4, s: 12, xs: 12),
+                              child: CustomCard(
+                                child: Center(child: Text('A')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(4, s: 12, xs: 12),
+                              heightSize:
+                                  context.fluid(4, s: 12, xs: 12),
+                              child: CustomCard(
+                                child: Center(child: Text('B')),
+                              )),
+                          FluidCell.withFluidHeight(
+                              size:
+                                  context.fluid(4, s: 12, xs: 12),
+                              heightSize:
+                                  context.fluid(4, s: 12, xs: 12),
+                              child: CustomCard(
+                                child: Center(child: Text('C')),
+                              )),
+                        ],
                       ),
                       SliverToBoxAdapter(
                         child: Container(

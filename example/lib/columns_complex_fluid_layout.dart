@@ -17,15 +17,14 @@ class ComplexColumnsFluidLayout extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: FluidLayout
                         .of(context)
                         .horizontalPadding),
-                    child: Fluid(
-                        child: FluidGridView(
+                    child:  FluidGridView(
                             shrinkWrap: true,
                             children: List.filled(
                               100,
-                              BreakpointColumn.count(
-                                  crossAxisCellCount:
+                              FluidCell.withFluidHeight(
+                                  size:
                                   context.fluid(3, m: 3, s: 4, xs: 6),
-                                  mainAxisCellCount:
+                                  heightSize:
                                   context.fluid(4, m: 4, s: 5, xs: 7),
                                   child: CustomCard(
                                     color: Colors.red,
@@ -33,17 +32,17 @@ class ComplexColumnsFluidLayout extends StatelessWidget {
                                   )),
                             ).asMap().map((index, value) =>
                                 MapEntry(index,
-                                  index % 3 == 0 ? value : BreakpointColumn
-                                      .count(
-                                      crossAxisCellCount:
+                                  index % 3 == 0 ? value : FluidCell
+                                      .withFluidHeight(
+                                      size:
                                       context.fluid(3, m: 3, s: 4, xs: 6),
-                                      mainAxisCellCount:
+                                      heightSize:
                                       context.fluid(2, m: 2, s: 2, xs: 2),
                                       child: CustomCard(
                                         color: Colors.red,
                                         child: Center(child: Text('Item')),
                                       )),)).values.toList())
-                    ),
+
                   ),
                 ),
           ),
