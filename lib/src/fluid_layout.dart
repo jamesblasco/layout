@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 class FluidLayout extends StatefulWidget {
   static FluidLayoutData of(BuildContext context) =>
-      context.inheritFromWidgetOfExactType(FluidLayoutData) as FluidLayoutData;
+      context.findAncestorWidgetOfExactType<FluidLayoutInheritedWidget>().data;
 
   final Widget child;
   final FluidValue<double> width;
@@ -26,39 +26,51 @@ class _FluidLayoutState extends State<FluidLayout> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       final double containerWidth = constraints.biggest?.width ?? 0;
-      return FluidLayoutData(
+      return FluidLayoutInheritedWidget(
           key: _key,
           child: widget.child,
-          containerWidth: containerWidth,
-          fluidWidth: (widget.width ?? _defaultFluidWidth)
-              .buildFromWidth(containerWidth),
-          horizontalPadding:
+          data: FluidLayoutData(
+              containerWidth: containerWidth,
+              fluidWidth: (widget.width ?? _defaultFluidWidth)
+                  .buildFromWidth(containerWidth),
+              horizontalPadding:
               (widget.horizontalPadding ?? defaultHorizontalSpacing)
                   .buildFromWidth(containerWidth),
-          fluidBreakpoint: FluidBreakpointsHelper.from(containerWidth));
+              fluidBreakpoint: FluidBreakpointsHelper.from(containerWidth)
+          ),
+         );
     });
   }
 }
 
-class FluidLayoutData extends InheritedWidget {
+class FluidLayoutData {
   final double containerWidth;
   final double fluidWidth;
   final double horizontalPadding;
   final FluidBreakpoint fluidBreakpoint;
+
   double get fluidPadding => (containerWidth - fluidWidth) / 2;
 
   FluidLayoutData(
       {Key key,
       this.containerWidth,
       this.fluidWidth,
-      Widget child,
       this.horizontalPadding,
-      this.fluidBreakpoint})
-      : super(key: key, child: child);
+      this.fluidBreakpoint});
+}
+
+class FluidLayoutInheritedWidget extends InheritedWidget {
+  final FluidLayoutData data;
+
+  FluidLayoutInheritedWidget({
+    Key key,
+    this.data,
+    Widget child,
+  }) : super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(FluidLayoutData oldWidget) {
-    return oldWidget.containerWidth != containerWidth;
+  bool updateShouldNotify(FluidLayoutInheritedWidget oldWidget) {
+    return oldWidget.data.containerWidth != data.containerWidth;
   }
 }
 
