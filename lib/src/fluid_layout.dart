@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 class FluidLayout extends StatefulWidget {
   static FluidLayoutData of(BuildContext context) =>
-      context.findAncestorWidgetOfExactType<FluidLayoutInheritedWidget>().data;
+      context.dependOnInheritedWidgetOfExactType<FluidLayoutInheritedWidget>().data;
 
   final Widget child;
   final FluidValue<double> width;
