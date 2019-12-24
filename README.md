@@ -1,7 +1,7 @@
 # Fluid Layout
 [![pub package](https://img.shields.io/pub/v/fluid_layout.svg)](https://pub.dev/packages/fluid_layout)  
 
-Demo: [jamesblasco.github.com/fluid_layout](http://jamesblasco.github.com/fluid_layout)
+Demo: [jamesblasco.github.io/fluid_layout](http://jamesblasco.github.io/fluid_layout)
 
 ![Fluid gif][]
 
