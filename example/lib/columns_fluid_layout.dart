@@ -14,22 +14,21 @@ class ColumnsFluidLayout extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: FluidLayout.of(context).horizontalPadding),
-                child: Fluid(
-                  child: FluidGridView(
+                child: FluidGridView(
                       shrinkWrap: true,
                       children: List.filled(
                         100,
-                        BreakpointColumn.count(
-                            crossAxisCellCount:
+                        FluidCell.withFluidHeight(
+                            size:
                                 context.fluid(3, m: 3, s: 4, xs: 6),
-                            mainAxisCellCount:
+                            heightSize:
                                 context.fluid(3, m: 3, s: 4, xs: 6),
                             child: CustomCard(
                               color: Colors.red,
                               child: Center(child: Text('Item')),
                             )),
                       )),
-                ),
+
               ),
             ),
           ),

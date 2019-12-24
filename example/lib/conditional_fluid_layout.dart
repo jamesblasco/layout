@@ -17,7 +17,7 @@ class ConditionalFluidLayout extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      if(FluidLayout.of(context).fluidBreakpoint.isLargerThanM)
+                      if(context.breakpoint.isLargerThanM)
                       Fluid(
                         child: Container(
                           height: 300,
