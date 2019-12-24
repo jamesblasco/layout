@@ -1,7 +1,7 @@
 # Fluid Layout
 [![pub package](https://img.shields.io/pub/v/fluid_layout.svg)](https://pub.dev/packages/fluid_layout)  
 
-Demo: [jamesblasco.github.com/fluid_layout](http://jamesblasco.github.com/fluid_layout)
+Demo: [jamesblasco.github.io/fluid_layout](http://jamesblasco.github.io/fluid_layout)
 
 ![Fluid gif][]
 
@@ -17,7 +17,7 @@ Follow the installation process [here](https://pub.dev/packages/fluid_layout#-in
 ### Understand fluid layout
 
 Fluid layout aims to help building a responsive experience through all the different screen sizes.
-Based in the boostrap approach, `FluidLayout` calculates a padding content (fluid_padding) that changes depending on the parent size, the `Fluid` widget uses that padding content to set its size
+Based in the boostrap approach, `FluidLayout` calculates a padding content (fluid_padding) that changes depending on the parent size. The `Fluid` widget uses that padding to set its size
 
 <img height="300" alt="" src="https://github.com/jamesblasco/fluid_layout/blob/master/fluid.png?raw=true"> 
 
