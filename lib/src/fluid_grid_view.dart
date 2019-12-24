@@ -55,14 +55,20 @@ class BreakpointColumn extends StatelessWidget {
 class FluidGridView extends StatelessWidget {
   final List<BreakpointColumn> children;
   final double spacing;
+  final bool shrinkWrap;
+  final ScrollPhysics physics;
+  final EdgeInsets padding;
 
-  FluidGridView({this.children, this.spacing});
+  FluidGridView({this.children, this.spacing, this.shrinkWrap = false, this.physics, this.padding = EdgeInsets.zero});
 
   @override
   Widget build(BuildContext context) {
     return StaggeredGridView.count(
         crossAxisCount: 12,
+        padding: padding,
         children: children,
+        shrinkWrap: shrinkWrap,
+        physics: physics,
         staggeredTiles: children.map((child) => child._tile).toList(),
         mainAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context),
         crossAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context));
@@ -73,7 +79,7 @@ class SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
   final double spacing;
   final List<BreakpointColumn> children;
 
-  SliverFluidGrid({
+  SliverFluidGrid( {
     Key key,
     this.spacing,
     this.children: const <BreakpointColumn>[],
