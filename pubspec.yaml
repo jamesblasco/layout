@@ -1,6 +1,7 @@
 name: fluid_layout
-description: Create responsive layout for mobile, web and desktop
-version: 0.0.10
+description: Create responsive layouts in flutter for mobile, web and desktop.
+version: 0.1.0
+author: 'JB <jaimeblasco97@gmail.com>'
 homepage: 'https://github.com/jamesblasco/fluid_layout'
 
 environment:
