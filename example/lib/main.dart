@@ -1,9 +1,15 @@
+import 'package:example/basic_layout.dart';
+import 'package:example/columns_complex_fluid_layout.dart';
+import 'package:example/fluid_layout_with_horizontal_scroll.dart';
 import 'package:example/sliver_example.dart';
 import 'package:fluid_layout/fluid_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import 'columns_fluid_layout.dart';
+import 'conditional_fluid_layout.dart';
 import 'custom_card.dart';
+import 'full_fluid_layout.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,28 +18,155 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          cardTheme: CardTheme(
-              elevation: 12,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12))),
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        cardTheme: CardTheme(
+            elevation: 12,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12))),
 
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      routes: {
+        '/': (_) => HomePage(),
+        '/basiclayout': (_) => BasicFluidLayout(),
+        '/full_width_rows_layout': (_) => FluidLayoutWithFullWidthRows(),
+        '/columnlayout': (_) => ColumnsFluidLayout(),
+        '/complexcolumnlayout': (_) => ComplexColumnsFluidLayout(),
+        '/conditionallayout': (_) => ConditionalFluidLayout(),
+        '/layout_with_horizontal_scrolling': (_) => FluidLayoutWithHorizontalScroll(),
+        '/fullexample': (_) => MyHomePage(title: 'Full example'),
+
+
+      },
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FluidLayout(
+        child: Builder(
+          builder: (context) => CustomScrollView(
+            slivers: <Widget>[
+              SliverToBoxAdapter(
+                  child: Fluid(
+                      child: Padding(
+                          padding: EdgeInsets.only(top: 64, bottom: 40),
+                          child: Text(
+                            'Fluid Layout examples',
+                            style: Theme.of(context).textTheme.title,
+                          )))),
+              SliverFluid(
+                sliver: SliverFluidGrid(children: [
+                  BreakpointColumn.fit(
+                    crossAxisCellCount:
+                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                    child: CustomCard(
+                      onTap: () =>
+                          Navigator.of(context).pushNamed('/basiclayout'),
+                      child: Container(
+                        height: 100,
+                        child: Center(child: Text('Basic fluid layout', textAlign: TextAlign.center)),
+                      ),
+                    ),
+                  ),
+                  BreakpointColumn.fit(
+                    crossAxisCellCount:
+                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                    child: CustomCard(
+                      onTap: () => Navigator.of(context)
+                          .pushNamed('/full_width_rows_layout'),
+                      child: Container(
+                        height: 100,
+                        child: Center(
+                            child: Text('Fluid Layout with full width rows', textAlign: TextAlign.center)),
+                      ),
+                    ),
+                  ),
+                  BreakpointColumn.fit(
+                    crossAxisCellCount:
+                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                    child: CustomCard(
+                      onTap: () => Navigator.of(context)
+                          .pushNamed('/columnlayout'),
+                      child: Container(
+                        height: 100,
+                        child: Center(
+                            child: Text('Column Fluid Layout', textAlign: TextAlign.center)),
+                      ),
+                    ),
+                  ),
+                  BreakpointColumn.fit(
+                    crossAxisCellCount:
+                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                    child: CustomCard(
+                      onTap: () => Navigator.of(context)
+                          .pushNamed('/complexcolumnlayout'),
+                      child: Container(
+                        height: 100,
+                        child: Center(
+                            child: Text('Complex Fluid Layout', textAlign: TextAlign.center)),
+                      ),
+                    ),
+                  ),
+                  BreakpointColumn.fit(
+                    crossAxisCellCount:
+                    context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                    child: CustomCard(
+                      onTap: () => Navigator.of(context)
+                          .pushNamed('/conditionallayout'),
+                      child: Container(
+                        height: 100,
+                        child: Center(
+                            child: Text('Conditional Fluid Layout', textAlign: TextAlign.center,)),
+                      ),
+                    ),
+                  ),
+                  BreakpointColumn.fit(
+                    crossAxisCellCount:
+                    context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                    child: CustomCard(
+                      onTap: () => Navigator.of(context)
+                          .pushNamed('/layout_with_horizontal_scrolling'),
+                      child: Container(
+                        height: 100,
+                        child: Center(
+                            child: Text('Fluid Layout with horizontal scrolling', textAlign: TextAlign.center)),
+                      ),
+                    ),
+                  ),
+                  BreakpointColumn.fit(
+                    crossAxisCellCount:
+                        context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                    child: CustomCard(
+                      onTap: () =>
+                          Navigator.of(context).pushNamed('/fullexample'),
+                      child: Container(
+                        height: 100,
+                        child: Center(child: Text('Full example', textAlign: TextAlign.center)),
+                      ),
+                    ),
+                  )
+                ]),
+              )
+            ],
+          ),
         ),
-        home: MyHomePage(
-          title: 'Fluid flutter',
-        ));
+      ),
+    );
   }
 }
 
