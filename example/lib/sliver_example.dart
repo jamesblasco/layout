@@ -57,10 +57,9 @@ class _MyHomePageState extends State<MySecondPage> {
                 sliver: SliverFluidGrid(
               children: [
                 FluidCell.withFixedHeight(
-                  size:
-                      FluidLayout.of(context).fluidBreakpoint.isLargerThanM
-                          ? 3
-                          : 6,
+                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                      ? 3
+                      : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,
@@ -72,10 +71,9 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  size:
-                      FluidLayout.of(context).fluidBreakpoint.isLargerThanM
-                          ? 3
-                          : 6,
+                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                      ? 3
+                      : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,
@@ -87,10 +85,9 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  size:
-                      FluidLayout.of(context).fluidBreakpoint.isLargerThanM
-                          ? 3
-                          : 6,
+                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                      ? 3
+                      : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,
@@ -102,10 +99,9 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  size:
-                      FluidLayout.of(context).fluidBreakpoint.isLargerThanM
-                          ? 3
-                          : 6,
+                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                      ? 3
+                      : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,

@@ -5,8 +5,9 @@ import 'package:fluid_layout/src/fluid_breakpoint.dart';
 import 'package:flutter/widgets.dart';
 
 class FluidLayout extends StatefulWidget {
-  static FluidLayoutData of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<FluidLayoutInheritedWidget>().data;
+  static FluidLayoutData of(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<FluidLayoutInheritedWidget>()
+      .data;
 
   final Widget child;
   final FluidValue<double> width;
@@ -27,18 +28,17 @@ class _FluidLayoutState extends State<FluidLayout> {
     return LayoutBuilder(builder: (context, constraints) {
       final double containerWidth = constraints.biggest?.width ?? 0;
       return FluidLayoutInheritedWidget(
-          key: _key,
-          child: widget.child,
-          data: FluidLayoutData(
-              containerWidth: containerWidth,
-              fluidWidth: (widget.width ?? _defaultFluidWidth)
-                  .buildFromWidth(containerWidth),
-              horizontalPadding:
-              (widget.horizontalPadding ?? defaultHorizontalSpacing)
-                  .buildFromWidth(containerWidth),
-              fluidBreakpoint: FluidBreakpointsHelper.from(containerWidth)
-          ),
-         );
+        key: _key,
+        child: widget.child,
+        data: FluidLayoutData(
+            containerWidth: containerWidth,
+            fluidWidth: (widget.width ?? _defaultFluidWidth)
+                .buildFromWidth(containerWidth),
+            horizontalPadding:
+                (widget.horizontalPadding ?? defaultHorizontalSpacing)
+                    .buildFromWidth(containerWidth),
+            fluidBreakpoint: FluidBreakpointsHelper.from(containerWidth)),
+      );
     });
   }
 }

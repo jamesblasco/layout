@@ -1,5 +1,4 @@
 import 'package:fluid_layout/fluid_layout.dart';
-import 'package:fluid_layout/src/fluid_breakpoint.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -10,31 +9,27 @@ class FluidCell extends StatelessWidget {
   final double height;
   final Widget child;
 
-  const FluidCell.fit(
-      {Key key, @required this.size, this.child})
+  const FluidCell.fit({Key key, @required this.size, this.child})
       : assert(size != null && size >= 0),
-        assert(size <= 12, 'The size value $size is not valid. Maximum number of columns is 12'),
+        assert(size <= 12,
+            'The size value $size is not valid. Maximum number of columns is 12'),
         heightSize = null,
         height = null,
         super(key: key);
 
   const FluidCell.withFixedHeight(
-      {Key key,
-      @required this.size,
-      @required this.height,
-      this.child})
+      {Key key, @required this.size, @required this.height, this.child})
       : assert(size != null && size >= 0),
-        assert(size <= 12, 'The size value $size is not valid. Maximum number of columns is 12'),
+        assert(size <= 12,
+            'The size value $size is not valid. Maximum number of columns is 12'),
         heightSize = null,
         super(key: key);
 
   const FluidCell.withFluidHeight(
-      {Key key,
-      @required this.size,
-      @required this.heightSize,
-      this.child})
+      {Key key, @required this.size, @required this.heightSize, this.child})
       : assert(size != null && size >= 0),
-        assert(size <= 12, 'The size value $size is not valid. Maximun number of columns is 12'),
+        assert(size <= 12,
+            'The size value $size is not valid. Maximun number of columns is 12'),
         height = null,
         super(key: key);
 

@@ -59,25 +59,25 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                       height: 190,
                       width: double.infinity,
                       color: Colors.white,
-                      child:  ListView.separated(
-                          itemCount: 10,
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                              FluidLayout.of(context).horizontalPadding +
-                                  FluidLayout.of(context).fluidPadding),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => CustomCard(
-                              color: Colors.green[200],
-                              child: Container(
-                                  height: 150,
-                                  width: 150,
-                                  child: Center(
-                                    child: Text('Item'),
-                                  ))),
-                          separatorBuilder: (_, __) => SizedBox(
-                              width: FluidLayout.of(context).horizontalPadding),
-                        ),
+                      child: ListView.separated(
+                        itemCount: 10,
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                FluidLayout.of(context).horizontalPadding +
+                                    FluidLayout.of(context).fluidPadding),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => CustomCard(
+                            color: Colors.green[200],
+                            child: Container(
+                                height: 150,
+                                width: 150,
+                                child: Center(
+                                  child: Text('Item'),
+                                ))),
+                        separatorBuilder: (_, __) => SizedBox(
+                            width: FluidLayout.of(context).horizontalPadding),
+                      ),
                     ),
                     SizedBox(height: 32),
                     Container(
@@ -105,17 +105,17 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                     SizedBox(height: 32),
                     Fluid(
                         child: CustomCard(
-                          color: Colors.white,
-                          child: Container(
-                              height: 100,
-                              width: double.infinity,
-                              child: Center(
-                                child: Text(
-                                  'Fluid',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              )),
-                        )),
+                      color: Colors.white,
+                      child: Container(
+                          height: 100,
+                          width: double.infinity,
+                          child: Center(
+                            child: Text(
+                              'Fluid',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )),
+                    )),
                   ],
                 ),
               ),
