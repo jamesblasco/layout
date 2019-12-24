@@ -21,9 +21,11 @@ class Fluid extends StatelessWidget {
 
 class SliverFluid extends SingleChildRenderObjectWidget {
   final double horizontalPadding;
+  final bool fluid;
   const SliverFluid({
     Key key,
     Widget sliver,
+    this.fluid = true,
     this.horizontalPadding,
   }) : super(key: key, child: sliver);
 
@@ -33,8 +35,8 @@ class SliverFluid extends SingleChildRenderObjectWidget {
         (horizontalPadding ?? FluidLayout.of(context).horizontalPadding);
     return RenderSliverPadding(
       padding: EdgeInsets.symmetric(
-          horizontal:
-              (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding),
+          horizontal: fluid ?
+              (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding: 0) ,
       textDirection: Directionality.of(context),
     );
   }
@@ -46,8 +48,8 @@ class SliverFluid extends SingleChildRenderObjectWidget {
         (horizontalPadding ?? FluidLayout.of(context).horizontalPadding);
     renderObject
       ..padding = EdgeInsets.symmetric(
-          horizontal:
-              (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding)
+          horizontal:  fluid ?
+              (FluidLayout.of(context).fluidPadding ?? 0) + innerPadding : 0)
       ..textDirection = Directionality.of(context);
   }
 
