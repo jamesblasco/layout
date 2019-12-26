@@ -75,6 +75,8 @@ For `CustomScrollView` there is a `SliverFluid` equivalent to `Fluid`
 
 ### FluidGridView
 
+A staggered grid view that divides the width size in 12 columns and makes easy to build responsive grid layout
+
 See [`FluidGridView` web example](https://jamesblasco.github.io/fluid_layout/#/columnlayout)
 
 ```dart
@@ -82,8 +84,8 @@ FluidGridView(
   children: List.filled(
     100,
     FluidCell.withFluidHeight(
-      size: context.fluid(3, m: 3, s: 4, xs: 6),
-      heightSize: context.fluid(3, m: 3, s: 4, xs: 6),
+      size: context.fluid(3, m: 3, s: 4, xs: 6), //max 12
+      heightSize: context.fluid(3, m: 3, s: 4, xs: 6), // max 12
       child: CustomCard(
         color: Colors.red,
         child: Center(child: Text('Item')),
@@ -108,7 +110,7 @@ See [Conditional Layout web example](https://jamesblasco.github.io/fluid_layout/
 if(FluidLayout.of(context).fluidBreakpoint.isLargerThanM)
    return Container(color: Colors.red)
 else
-   return Container(color: Colors.red)              
+   return Container(color: Colors.green)              
 ```
 Remember you can use `context.breakpoint` as `FluidLayout.of(context).fluidBreakpoint`
 
