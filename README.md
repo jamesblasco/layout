@@ -86,7 +86,7 @@ FluidGridView(
     FluidCell.withFluidHeight(
       size: context.fluid(3, m: 3, s: 4, xs: 6), //max 12
       heightSize: context.fluid(3, m: 3, s: 4, xs: 6), // max 12
-      child: CustomCard(
+      child: Container(
         color: Colors.red,
         child: Center(child: Text('Item')),
       )),
