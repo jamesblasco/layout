@@ -1,3 +1,5 @@
+![Lava Clock](https://github.com/jamesblasco/fluid_layout/blob/master/fluid_layout_logo.png?raw=true)
+
 # Fluid Layout
 [![pub package](https://img.shields.io/pub/v/fluid_layout.svg)](https://pub.dev/packages/fluid_layout)  
 
