@@ -3,51 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class FluidCell extends StatelessWidget {
-  final int size;
-  final num heightSize;
-  final double height;
-  final Widget child;
-
-  const FluidCell.fit({Key key, @required this.size, this.child})
-      : assert(size != null && size >= 0),
-        assert(size <= 12,
-            'The size value $size is not valid. Maximum number of columns is 12'),
-        heightSize = null,
-        height = null,
-        super(key: key);
-
-  const FluidCell.withFixedHeight(
-      {Key key, @required this.size, @required this.height, this.child})
-      : assert(size != null && size >= 0),
-        assert(size <= 12,
-            'The size value $size is not valid. Maximum number of columns is 12'),
-        heightSize = null,
-        super(key: key);
-
-  const FluidCell.withFluidHeight(
-      {Key key, @required this.size, @required this.heightSize, this.child})
-      : assert(size != null && size >= 0),
-        assert(size <= 12,
-            'The size value $size is not valid. Maximun number of columns is 12'),
-        height = null,
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
-  }
-
-  StaggeredTile get _tile {
-    if (heightSize == null && height == null) {
-      return StaggeredTile.fit(size);
-    } else if (heightSize == null) {
-      return StaggeredTile.extent(size, height);
-    } else {
-      return StaggeredTile.count(size, heightSize);
-    }
-  }
-}
 
 class FluidGridView extends StatelessWidget {
   final List<FluidCell> children;
@@ -56,7 +11,6 @@ class FluidGridView extends StatelessWidget {
   final ScrollPhysics physics;
   final EdgeInsets innerPadding;
   final bool fluid;
-  final double horizontalPadding;
 
   FluidGridView(
       {this.children,
@@ -64,13 +18,11 @@ class FluidGridView extends StatelessWidget {
       this.shrinkWrap = false,
       this.physics,
       this.innerPadding = EdgeInsets.zero,
-      this.fluid,
-      this.horizontalPadding});
+      this.fluid});
 
   @override
   Widget build(BuildContext context) {
-    return Fluid(
-        horizontalPadding: horizontalPadding,
+    return FluidPadding(
         fluid: fluid,
         child: StaggeredGridView.count(
             crossAxisCount: 12,
@@ -79,13 +31,13 @@ class FluidGridView extends StatelessWidget {
             shrinkWrap: shrinkWrap,
             physics: physics,
             staggeredTiles: children.map((child) => child._tile).toList(),
-            mainAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context),
+            mainAxisSpacing: spacing ?? FluidLayout.of(context).spacing,
             crossAxisSpacing:
-                spacing ?? defaultHorizontalSpacing.build(context)));
+                spacing ?? FluidLayout.of(context).spacing));
   }
 }
 
-class SliverFluidGrid extends SliverFluid {
+class SliverFluidGrid extends SliverFluidPadding {
   final double horizontalPadding;
   final bool fluid;
   final double spacing;
@@ -100,7 +52,6 @@ class SliverFluidGrid extends SliverFluid {
   }) : super(
             key: key,
             fluid: fluid,
-            horizontalPadding: horizontalPadding,
             sliver: _SliverFluidGrid(
               spacing: spacing,
               children: children,
@@ -124,8 +75,8 @@ class _SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
   SliverStaggeredGridDelegate gridDelegate(BuildContext context) =>
       SliverStaggeredGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 12,
-        mainAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context),
-        crossAxisSpacing: spacing ?? defaultHorizontalSpacing.build(context),
+        mainAxisSpacing: spacing ?? FluidLayout.of(context).spacing,
+        crossAxisSpacing: spacing ?? FluidLayout.of(context).spacing,
         staggeredTileBuilder: (i) => children[i]._tile,
         staggeredTileCount: children?.length,
       );
@@ -160,3 +111,52 @@ class _SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
     );
   }
 }
+
+
+
+class FluidCell extends StatelessWidget {
+  final int fluidWidth;
+  final num fluidHeight;
+  final double height;
+  final Widget child;
+
+  const FluidCell.fit({Key key, @required this.fluidWidth, this.child})
+      : assert(fluidWidth != null && fluidWidth >= 0),
+        assert(fluidWidth <= 12,
+        'The size value $fluidWidth is not valid. Maximum number of columns is 12'),
+        fluidHeight = null,
+        height = null,
+        super(key: key);
+
+  const FluidCell.withFixedHeight(
+      {Key key, @required this.fluidWidth, @required this.height, this.child})
+      : assert(fluidWidth != null && fluidWidth >= 0),
+        assert(fluidWidth <= 12,
+        'The size value $fluidWidth is not valid. Maximum number of columns is 12'),
+        fluidHeight = null,
+        super(key: key);
+
+  const FluidCell.withFluidHeight(
+      {Key key, @required this.fluidWidth, @required this.fluidHeight, this.child})
+      : assert(fluidWidth != null && fluidWidth >= 0),
+        assert(fluidWidth <= 12,
+        'The size value $fluidWidth is not valid. Maximun number of columns is 12'),
+        height = null,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return child;
+  }
+
+  StaggeredTile get _tile {
+    if (fluidHeight == null && height == null) {
+      return StaggeredTile.fit(fluidWidth);
+    } else if (fluidHeight == null) {
+      return StaggeredTile.extent(fluidWidth, height);
+    } else {
+      return StaggeredTile.count(fluidWidth, fluidHeight);
+    }
+  }
+}
+

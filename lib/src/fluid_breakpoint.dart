@@ -1,102 +1,102 @@
-enum FluidBreakpoint { xs, s, m, l, xl }
 
-extension FluidBreakpointsHelper on FluidBreakpoint {
-  static FluidBreakpoint from(double width) {
-    if (width < 576)
-      return FluidBreakpoint.xs;
-    else if (width < 768)
-      return FluidBreakpoint.s;
-    else if (width < 992)
-      return FluidBreakpoint.m;
-    else if (width < 1200)
-      return FluidBreakpoint.l;
-    else
-      return FluidBreakpoint.xl;
+
+enum LayoutBreakpoint {
+  us, // Ultra Small Screens
+  xs, // Extra Small Screens
+  sm,  // Small Screen
+  md,  // Small Screen
+  lg,  // Medium Screens
+  xl, // Medium Screens
+  ul  //  Ultra Large Screens
+}
+
+
+extension FluidBreakpointsHelper on LayoutBreakpoint {
+  LayoutBreakpoint get smallerBreakpoint {
+    switch (this) {
+      case LayoutBreakpoint.us:
+        return null;
+      case LayoutBreakpoint.xs:
+        return LayoutBreakpoint.us;
+      case LayoutBreakpoint.sm:
+        return LayoutBreakpoint.xs;
+      case LayoutBreakpoint.md:
+        return LayoutBreakpoint.sm;
+      case LayoutBreakpoint.lg:
+        return LayoutBreakpoint.md;
+      case LayoutBreakpoint.xl:
+        return LayoutBreakpoint.lg;
+      case LayoutBreakpoint.ul:
+        return LayoutBreakpoint.xl;
+    }
+    return null;
   }
 
-  double get maxContainerWidth {
+  LayoutBreakpoint get biggerBreakpoint {
     switch (this) {
-      case FluidBreakpoint.xs:
-        return 576;
-      case FluidBreakpoint.s:
-        return 768;
-      case FluidBreakpoint.m:
-        return 992;
-      case FluidBreakpoint.l:
-        return 1200;
-      case FluidBreakpoint.xl:
+      case LayoutBreakpoint.us:
+        return LayoutBreakpoint.xs;
+      case LayoutBreakpoint.xs:
+        return LayoutBreakpoint.sm;
+      case LayoutBreakpoint.sm:
+        return LayoutBreakpoint.md;
+      case LayoutBreakpoint.md:
+        return LayoutBreakpoint.lg;
+      case LayoutBreakpoint.lg:
+        return LayoutBreakpoint.xl;
+      case LayoutBreakpoint.xl:
+        return LayoutBreakpoint.us;
+      case LayoutBreakpoint.us:
         return null;
     }
     return null;
   }
 
-  double get maxFluidWidth {
-    switch (this) {
-      case FluidBreakpoint.xs:
-        return 540;
-      case FluidBreakpoint.s:
-        return 720;
-      case FluidBreakpoint.m:
-        return 960;
-      case FluidBreakpoint.l:
-        return 1140;
-      case FluidBreakpoint.xl:
-        return 1140;
-    }
-    return null;
-  }
+  bool get isUs => LayoutBreakpoint.us == this;
 
-  FluidBreakpoint get smallerBreakpoint {
-    switch (this) {
-      case FluidBreakpoint.xs:
-        return null;
-      case FluidBreakpoint.s:
-        return FluidBreakpoint.xs;
-      case FluidBreakpoint.m:
-        return FluidBreakpoint.s;
-      case FluidBreakpoint.l:
-        return FluidBreakpoint.m;
-      case FluidBreakpoint.xl:
-        return FluidBreakpoint.l;
-    }
-    return null;
-  }
+  bool get isXs => LayoutBreakpoint.xs == this;
 
-  FluidBreakpoint get biggerBreakpoint {
-    switch (this) {
-      case FluidBreakpoint.xs:
-        return FluidBreakpoint.s;
-      case FluidBreakpoint.s:
-        return FluidBreakpoint.m;
-      case FluidBreakpoint.m:
-        return FluidBreakpoint.l;
-      case FluidBreakpoint.l:
-        return FluidBreakpoint.xl;
-      case FluidBreakpoint.xl:
-        return null;
-    }
-    return null;
-  }
+  bool get isS => LayoutBreakpoint.sm == this;
 
-  bool get isXs => FluidBreakpoint.xs == this;
-  bool get isS => FluidBreakpoint.s == this;
-  bool get isM => FluidBreakpoint.m == this;
-  bool get isL => FluidBreakpoint.l == this;
-  bool get isXl => FluidBreakpoint.xl == this;
+  bool get isM => LayoutBreakpoint.md == this;
 
-  bool isLargerThan(FluidBreakpoint breakpoint) =>
+  bool get isL => LayoutBreakpoint.lg == this;
+
+  bool get isXl => LayoutBreakpoint.xl == this;
+
+  bool get isUl => LayoutBreakpoint.xl == this;
+
+  bool isLargerThan(LayoutBreakpoint breakpoint) =>
       breakpoint.index < this.index;
-  bool get isLargerThanXs => this.isLargerThan(FluidBreakpoint.xs);
-  bool get isLargerThanS => this.isLargerThan(FluidBreakpoint.s);
-  bool get isLargerThanM => this.isLargerThan(FluidBreakpoint.m);
-  bool get isLargerThanL => this.isLargerThan(FluidBreakpoint.l);
-  bool get isLargerThanXl => this.isLargerThan(FluidBreakpoint.xl);
 
-  bool isSmallerThan(FluidBreakpoint breakpoint) =>
+  bool isSmallerThan(LayoutBreakpoint breakpoint) =>
       breakpoint.index > this.index;
-  bool get isSmallerThanXs => this.isSmallerThan(FluidBreakpoint.xs);
-  bool get isSmallerThanS => this.isSmallerThan(FluidBreakpoint.s);
-  bool get isSmallerThanM => this.isSmallerThan(FluidBreakpoint.m);
-  bool get isSmallerThanL => this.isSmallerThan(FluidBreakpoint.l);
-  bool get isSmallerThanXl => this.isSmallerThan(FluidBreakpoint.xl);
+
+  bool get isLargerThanUs => this.isLargerThan(LayoutBreakpoint.us);
+
+  bool get isLargerThanXs => this.isLargerThan(LayoutBreakpoint.xs);
+
+  bool get isLargerThanS => this.isLargerThan(LayoutBreakpoint.sm);
+
+  bool get isLargerThanM => this.isLargerThan(LayoutBreakpoint.md);
+
+  bool get isLargerThanL => this.isLargerThan(LayoutBreakpoint.lg);
+
+  bool get isLargerThanXl => this.isLargerThan(LayoutBreakpoint.xl);
+
+  bool get isLargerThanUl => this.isLargerThan(LayoutBreakpoint.ul);
+
+  bool get isSmallerThanUs => this.isSmallerThan(LayoutBreakpoint.us);
+
+  bool get isSmallerThanXs => this.isSmallerThan(LayoutBreakpoint.xs);
+
+  bool get isSmallerThanS => this.isSmallerThan(LayoutBreakpoint.sm);
+
+  bool get isSmallerThanM => this.isSmallerThan(LayoutBreakpoint.md);
+
+  bool get isSmallerThanL => this.isSmallerThan(LayoutBreakpoint.lg);
+
+  bool get isSmallerThanXl => this.isSmallerThan(LayoutBreakpoint.xl);
+
+  bool get isSmallerThanUl => this.isSmallerThan(LayoutBreakpoint.ul);
 }
