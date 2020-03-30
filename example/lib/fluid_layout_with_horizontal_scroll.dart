@@ -14,10 +14,10 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: FluidLayout.of(context).horizontalPadding),
+                    vertical: FluidLayout.of(context).spacing),
                 child: Column(
                   children: <Widget>[
-                    Fluid(
+                    FluidPadding(
                         child: CustomCard(
                       color: Colors.white,
                       child: Container(
@@ -37,7 +37,7 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                         itemCount: 10,
                         padding: EdgeInsets.symmetric(
                             horizontal:
-                                FluidLayout.of(context).horizontalPadding +
+                                FluidLayout.of(context).spacing +
                                     FluidLayout.of(context).fluidPadding),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
@@ -50,7 +50,7 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                                   child: Text('Item'),
                                 ))),
                         separatorBuilder: (_, __) => SizedBox(
-                            width: FluidLayout.of(context).horizontalPadding),
+                            width: FluidLayout.of(context).spacing),
                       ),
                     ),
                     SizedBox(height: 32),
@@ -63,7 +63,7 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                         itemCount: 10,
                         padding: EdgeInsets.symmetric(
                             horizontal:
-                                FluidLayout.of(context).horizontalPadding +
+                                FluidLayout.of(context).spacing +
                                     FluidLayout.of(context).fluidPadding),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
@@ -76,7 +76,7 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                                   child: Text('Item'),
                                 ))),
                         separatorBuilder: (_, __) => SizedBox(
-                            width: FluidLayout.of(context).horizontalPadding),
+                            width: FluidLayout.of(context).spacing),
                       ),
                     ),
                     SizedBox(height: 32),
@@ -86,7 +86,7 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                         itemCount: 10,
                         padding: EdgeInsets.symmetric(
                             horizontal:
-                                FluidLayout.of(context).horizontalPadding +
+                                FluidLayout.of(context).spacing +
                                     FluidLayout.of(context).fluidPadding),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
@@ -99,11 +99,11 @@ class FluidLayoutWithHorizontalScroll extends StatelessWidget {
                                   child: Text('Item'),
                                 ))),
                         separatorBuilder: (_, __) => SizedBox(
-                            width: FluidLayout.of(context).horizontalPadding),
+                            width: FluidLayout.of(context).spacing),
                       ),
                     ),
                     SizedBox(height: 32),
-                    Fluid(
+                    FluidPadding(
                         child: CustomCard(
                       color: Colors.white,
                       child: Container(

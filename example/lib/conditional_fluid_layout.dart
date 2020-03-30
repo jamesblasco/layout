@@ -15,7 +15,7 @@ class ConditionalFluidLayout extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               if (context.breakpoint.isLargerThanM)
-                                Fluid(
+                                FluidPadding(
                                   child: Container(
                                     height: 300,
                                     color: Colors.white,
@@ -29,7 +29,7 @@ class ConditionalFluidLayout extends StatelessWidget {
                                   ),
                                 )
                               else
-                                Fluid(
+                                FluidPadding(
                                   child: Container(
                                     height: 150,
                                     color: Colors.black,
@@ -52,7 +52,7 @@ class ConditionalFluidLayout extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Fluid(
+                              FluidPadding(
                                 child: Container(
                                   height: 300,
                                   color: Colors.white,

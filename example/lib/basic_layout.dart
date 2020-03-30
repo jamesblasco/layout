@@ -8,7 +8,7 @@ class BasicFluidLayout extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       body: Container(
         child: FluidLayout(
-          child: Fluid(
+          child: FluidPadding(
             child: Container(
               color: Colors.blue,
               child: Center(

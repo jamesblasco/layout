@@ -53,11 +53,11 @@ class _MyHomePageState extends State<MySecondPage> {
         builder: (context) => CustomScrollView(
           slivers: [
             //Container(color: Colors.grey),
-            SliverFluid(
+            SliverFluidPadding(
                 sliver: SliverFluidGrid(
               children: [
                 FluidCell.withFixedHeight(
-                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
                       ? 3
                       : 6,
                   height: 40,
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
                       ? 3
                       : 6,
                   height: 40,
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
                       ? 3
                       : 6,
                   height: 40,
@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  size: FluidLayout.of(context).fluidBreakpoint.isLargerThanM
+                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
                       ? 3
                       : 6,
                   height: 40,

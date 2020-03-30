@@ -57,20 +57,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FluidLayout(
+        format: BoostrapFormat(),
         child: Builder(
           builder: (context) => CustomScrollView(
             slivers: <Widget>[
               SliverToBoxAdapter(
-                  child: Fluid(
+                  child: FluidPadding(
                       child: Padding(
                           padding: EdgeInsets.only(top: 64, bottom: 40),
                           child: Text(
                             'Fluid Layout examples',
                             style: Theme.of(context).textTheme.title,
                           )))),
-              SliverFluidGrid(children: [
+              SliverFluidGrid(
+                  children: [
                 FluidCell.fit(
-                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  fluidWidth: context.fluid(3, xs: 6, sm: 6, md: 4, lg: 3),
                   child: CustomCard(
                     onTap: () =>
                         Navigator.of(context).pushNamed('/basiclayout'),
@@ -83,7 +85,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 FluidCell.fit(
-                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  fluidWidth: context.fluid(3, xs: 6, sm: 6, md: 4, lg: 3),
                   child: CustomCard(
                     onTap: () => Navigator.of(context)
                         .pushNamed('/full_width_rows_layout'),
@@ -96,7 +98,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 FluidCell.fit(
-                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  fluidWidth: context.fluid(3, xs: 6, sm: 6, md: 4, lg: 3),
                   child: CustomCard(
                     onTap: () =>
                         Navigator.of(context).pushNamed('/columnlayout'),
@@ -109,7 +111,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 FluidCell.fit(
-                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  fluidWidth: context.fluid(3, xs: 6, sm: 6, md: 4, lg: 3),
                   child: CustomCard(
                     onTap: () =>
                         Navigator.of(context).pushNamed('/complexcolumnlayout'),
@@ -122,7 +124,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 FluidCell.fit(
-                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  fluidWidth: context.fluid(3, xs: 6, sm: 6, md: 4, lg: 3),
                   child: CustomCard(
                     onTap: () =>
                         Navigator.of(context).pushNamed('/conditionallayout'),
@@ -137,7 +139,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 FluidCell.fit(
-                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  fluidWidth: context.fluid(3, xs: 6, sm: 6, md: 4, lg: 3),
                   child: CustomCard(
                     onTap: () => Navigator.of(context)
                         .pushNamed('/layout_with_horizontal_scrolling'),
@@ -150,7 +152,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 FluidCell.fit(
-                  size: context.fluid(3, xs: 6, s: 6, m: 4, l: 3),
+                  fluidWidth: context.fluid(3, xs: 6, sm: 6, md: 4, lg: 3),
                   child: CustomCard(
                     onTap: () =>
                         Navigator.of(context).pushNamed('/fullexample'),
@@ -203,12 +205,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     slivers: <Widget>[
                       SliverToBoxAdapter(
                           child: SizedBox(
-                              height: context.fluid(60, xs: 12, s: 12))),
+                              height: context.fluid(60, xs: 12, sm: 12))),
                       SliverFluidGrid(
                         children: [
                           if (context.breakpoint.isSmallerThanM)
                             FluidCell.fit(
-                                size: context.fluid(12),
+                                fluidWidth: context.fluid(12),
                                 child: CustomCard(
                                     child: Container(
                                   height: 100,
@@ -217,148 +219,148 @@ class _MyHomePageState extends State<MyHomePage> {
                                           'Only visible in small screens')),
                                 ))),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(12),
-                              heightSize: context.fluid(4),
+                              fluidWidth: context.fluid(12),
+                              fluidHeight: context.fluid(4),
                               child: CustomCard(
                                 color: Colors.green,
                                 child: Center(child: Text('Header')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 3, s: 6, xs: 6),
-                              heightSize: context.fluid(3, m: 3, s: 6, xs: 6),
+                              fluidWidth: context.fluid(3, md: 3, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(3, md: 3, sm: 6, xs: 6),
                               child: CustomCard(
                                 child: Center(child: Text('A')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 3, s: 6, xs: 6),
-                              heightSize: context.fluid(3, m: 3, s: 4, xs: 4),
+                              fluidWidth: context.fluid(3, md: 3, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(3, md: 3, sm: 4, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('B')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 3, s: 6, xs: 6),
-                              heightSize: context.fluid(3, m: 3, s: 6, xs: 6),
+                              fluidWidth: context.fluid(3, md: 3, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(3, md: 3, sm: 6, xs: 6),
                               child: CustomCard(
                                 child: Center(child: Text('C')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 3, s: 6, xs: 6),
-                              heightSize: context.fluid(3, m: 3, s: 4, xs: 4),
+                              fluidWidth: context.fluid(3, md: 3, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(3, md: 3, sm: 4, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('D')),
                               )),
                           FluidCell.withFixedHeight(
-                              size: context.fluid(12),
+                              fluidWidth: context.fluid(12),
                               height: 1,
                               child: Container(
                                 color: Colors.black12,
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 6, s: 12, xs: 12),
-                              heightSize: 3,
+                              fluidWidth: context.fluid(3, md: 6, sm: 12, xs: 12),
+                              fluidHeight: 3,
                               child: CustomCard(
                                 color: Colors.green,
                                 child: Center(child: Text('1')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 6, s: 6, xs: 6),
-                              heightSize: context.fluid(1.45, s: 2, xs: 2),
+                              fluidWidth: context.fluid(3, md: 6, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(1.45, sm: 2, xs: 2),
                               child: CustomCard(
                                 child: Center(child: Text('2')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 6, s: 6, xs: 6),
-                              heightSize: context.fluid(1.45, s: 2, xs: 2),
+                              fluidWidth: context.fluid(3, md: 6, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(1.45, sm: 2, xs: 2),
                               child: CustomCard(
                                 child: Center(child: Text('3')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 6, s: 6, xs: 6),
-                              heightSize: context.fluid(1.45, s: 2, xs: 2),
+                              fluidWidth: context.fluid(3, md: 6, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(1.45, sm: 2, xs: 2),
                               child: CustomCard(
                                 child: Center(child: Text('4')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 6, s: 6, xs: 6),
-                              heightSize: context.fluid(1.45, s: 2, xs: 2),
+                              fluidWidth: context.fluid(3, md: 6, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(1.45, sm: 2, xs: 2),
                               child: CustomCard(
                                 child: Center(child: Text('5')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 6, s: 6, xs: 6),
-                              heightSize: context.fluid(1.45, s: 2, xs: 2),
+                              fluidWidth: context.fluid(3, md: 6, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(1.45, sm: 2, xs: 2),
                               child: CustomCard(
                                 child: Center(child: Text('6')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(3, m: 6, s: 6, xs: 6),
-                              heightSize: context.fluid(1.45, s: 2, xs: 2),
+                              fluidWidth: context.fluid(3, md: 6, sm: 6, xs: 6),
+                              fluidHeight: context.fluid(1.45, sm: 2, xs: 2),
                               child: CustomCard(
                                 child: Center(child: Text('7')),
                               )),
                           FluidCell.withFixedHeight(
-                              size: 12,
+                              fluidWidth: 12,
                               height: 150,
                               child: CustomCard(
                                 color: Colors.green,
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                              heightSize:
-                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              fluidWidth: context.fluid(2, lg: 2, md: 4, sm: 3, xs: 4),
+                              fluidHeight:
+                                  context.fluid(2, lg: 2, md: 3, sm: 3, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('I')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                              heightSize:
-                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              fluidWidth: context.fluid(2, lg: 2, md: 4, sm: 3, xs: 4),
+                              fluidHeight:
+                                  context.fluid(2, lg: 2, md: 3, sm: 3, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('I')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                              heightSize:
-                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              fluidWidth: context.fluid(2, lg: 2, md: 4, sm: 3, xs: 4),
+                              fluidHeight:
+                                  context.fluid(2, lg: 2, md: 3, sm: 3, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('I')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                              heightSize:
-                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              fluidWidth: context.fluid(2, lg: 2, md: 4, sm: 3, xs: 4),
+                              fluidHeight:
+                                  context.fluid(2, lg: 2, md: 3, sm: 3, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('I')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                              heightSize:
-                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              fluidWidth: context.fluid(2, lg: 2, md: 4, sm: 3, xs: 4),
+                              fluidHeight:
+                                  context.fluid(2, lg: 2, md: 3, sm: 3, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('I')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(2, l: 2, m: 4, s: 3, xs: 4),
-                              heightSize:
-                                  context.fluid(2, l: 2, m: 3, s: 3, xs: 4),
+                              fluidWidth: context.fluid(2, lg: 2, md: 4, sm: 3, xs: 4),
+                              fluidHeight:
+                                  context.fluid(2, lg: 2, md: 3, sm: 3, xs: 4),
                               child: CustomCard(
                                 child: Center(child: Text('I')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(4, s: 12, xs: 12),
-                              heightSize: context.fluid(4, s: 12, xs: 12),
+                              fluidWidth: context.fluid(4, sm: 12, xs: 12),
+                              fluidHeight: context.fluid(4, sm: 12, xs: 12),
                               child: CustomCard(
                                 child: Center(child: Text('A')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(4, s: 12, xs: 12),
-                              heightSize: context.fluid(4, s: 12, xs: 12),
+                              fluidWidth: context.fluid(4, sm: 12, xs: 12),
+                              fluidHeight: context.fluid(4, sm: 12, xs: 12),
                               child: CustomCard(
                                 child: Center(child: Text('B')),
                               )),
                           FluidCell.withFluidHeight(
-                              size: context.fluid(4, s: 12, xs: 12),
-                              heightSize: context.fluid(4, s: 12, xs: 12),
+                              fluidWidth: context.fluid(4, sm: 12, xs: 12),
+                              fluidHeight: context.fluid(4, sm: 12, xs: 12),
                               child: CustomCard(
                                 child: Center(child: Text('C')),
                               )),
@@ -375,7 +377,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       SliverToBoxAdapter(child: SizedBox(height: 40)),
                       context.breakpoint.isLargerThanM
-                          ? SliverFluid(
+                          ? SliverFluidPadding(
                               sliver: SliverToBoxAdapter(
                                   child: CustomCard(
                                       child: Container(

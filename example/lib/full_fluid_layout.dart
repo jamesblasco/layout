@@ -13,7 +13,7 @@ class FluidLayoutWithFullWidthRows extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Fluid(
+                  FluidPadding(
                     child: Container(
                       height: 300,
                       color: Colors.white,
@@ -35,7 +35,7 @@ class FluidLayoutWithFullWidthRows extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Fluid(
+                  FluidPadding(
                     child: Container(
                       height: 300,
                       color: Colors.white,

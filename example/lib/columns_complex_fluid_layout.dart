@@ -14,14 +14,14 @@ class ComplexColumnsFluidLayout extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
               child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: FluidLayout.of(context).horizontalPadding),
+                      vertical: FluidLayout.of(context).spacing),
                   child: FluidGridView(
                       shrinkWrap: true,
                       children: List.filled(
                         100,
                         FluidCell.withFluidHeight(
-                            size: context.fluid(3, m: 3, s: 4, xs: 6),
-                            heightSize: context.fluid(4, m: 4, s: 5, xs: 7),
+                            fluidWidth: context.fluid(3, md: 3, sm: 4, xs: 6),
+                            fluidHeight: context.fluid(4, md: 4, sm: 5, xs: 7),
                             child: CustomCard(
                               color: Colors.red,
                               child: Center(child: Text('Item')),
@@ -33,10 +33,10 @@ class ComplexColumnsFluidLayout extends StatelessWidget {
                                 index % 3 == 0
                                     ? value
                                     : FluidCell.withFluidHeight(
-                                        size:
-                                            context.fluid(3, m: 3, s: 4, xs: 6),
-                                        heightSize:
-                                            context.fluid(2, m: 2, s: 2, xs: 2),
+                                        fluidWidth:
+                                            context.fluid(3, md: 3, sm: 4, xs: 6),
+                                        fluidHeight:
+                                            context.fluid(2, md: 2, sm: 2, xs: 2),
                                         child: CustomCard(
                                           color: Colors.red,
                                           child: Center(child: Text('Item')),
