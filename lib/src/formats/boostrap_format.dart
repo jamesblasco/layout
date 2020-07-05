@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:fluid_layout/fluid_layout.dart';
 import 'package:fluid_layout/src/core/fluid_value.dart';
 
-import 'layout_format.dart';
+import '../core/layout_format.dart';
 
 class BoostrapFormat extends LayoutFormat {
   Map<LayoutBreakpoint, double> get maxWidth => {

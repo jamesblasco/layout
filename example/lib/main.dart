@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:example/basic_layout.dart';
 import 'package:example/columns_complex_fluid_layout.dart';
 import 'package:example/fluid_layout_with_horizontal_scroll.dart';
@@ -11,7 +12,12 @@ import 'conditional_fluid_layout.dart';
 import 'custom_card.dart';
 import 'full_fluid_layout.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+  DevicePreview(
+    builder: (context) => MyApp(),
+  ),
+);
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,6 +26,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      locale: DevicePreview.of(context).locale, // <--- Add the locale
+      builder: DevicePreview.appBuilder,
       theme: ThemeData(
         cardTheme: CardTheme(
             elevation: 12,

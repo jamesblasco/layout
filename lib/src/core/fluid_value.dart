@@ -1,4 +1,4 @@
-import 'package:fluid_layout/src/formats/layout_format.dart';
+import 'package:fluid_layout/src/core/layout_format.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../fluid_layout.dart';

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:fluid_layout/fluid_layout.dart';
 import 'package:fluid_layout/src/fluid_breakpoint.dart';
-import 'package:fluid_layout/src/formats/layout_format.dart';
+import 'package:fluid_layout/src/core/layout_format.dart';
 import 'package:flutter/widgets.dart';
 
 import 'formats/fluid_format.dart';
@@ -37,6 +37,7 @@ class FluidLayoutData {
   final double containerWidth;
   final double fluidWidth;
   final double spacing;
+  final double margin;
   final LayoutBreakpoint breakpoint;
   final LayoutFormat format;
 
@@ -44,6 +45,7 @@ class FluidLayoutData {
 
   FluidLayoutData({Key key,
     this.containerWidth,
+    this.margin,
     this.fluidWidth,
     this.format,
     this.spacing,
@@ -60,13 +62,12 @@ class _FluidLayoutState extends State<FluidLayout> {
       final double containerWidth = constraints.biggest?.width ?? 0;
       final fluidWidth = format.width.valueFromWidth(containerWidth);
       final spacing = format.spacing.valueFromWidth(containerWidth);
+      final margin = format.spacing.valueFromWidth(containerWidth);
       final breakpoint = format.breakpointLimit.calculateBreakpoint(
           containerWidth);
-      print(containerWidth);
-      print(fluidWidth);
-      print(breakpoint);
       final data = FluidLayoutData(
           format: format,
+          margin: margin,
           containerWidth: containerWidth,
           fluidWidth: fluidWidth,
           spacing: spacing,

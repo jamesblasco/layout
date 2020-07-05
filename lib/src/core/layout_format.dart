@@ -12,6 +12,8 @@ abstract class LayoutFormat {
 
   FluidValue<double> spacing = FluidValue.constant(0);
 
+  FluidValue<double> margin = FluidValue.constant(0);
+
 }
 
 

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import '../../fluid_layout.dart';
-import 'layout_format.dart';
+import '../core/layout_format.dart';
 
 class FluidFormat extends LayoutFormat {
   @override

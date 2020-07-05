@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-
 class FluidGridView extends StatelessWidget {
   final List<FluidCell> children;
   final double spacing;
@@ -11,10 +10,12 @@ class FluidGridView extends StatelessWidget {
   final ScrollPhysics physics;
   final EdgeInsets innerPadding;
   final bool fluid;
+  final double margin;
 
   FluidGridView(
       {this.children,
       this.spacing,
+      this.margin,
       this.shrinkWrap = false,
       this.physics,
       this.innerPadding = EdgeInsets.zero,
@@ -24,6 +25,7 @@ class FluidGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return FluidPadding(
         fluid: fluid,
+        margin: margin,
         child: StaggeredGridView.count(
             crossAxisCount: 12,
             padding: innerPadding,
@@ -32,8 +34,7 @@ class FluidGridView extends StatelessWidget {
             physics: physics,
             staggeredTiles: children.map((child) => child._tile).toList(),
             mainAxisSpacing: spacing ?? FluidLayout.of(context).spacing,
-            crossAxisSpacing:
-                spacing ?? FluidLayout.of(context).spacing));
+            crossAxisSpacing: spacing ?? FluidLayout.of(context).spacing));
   }
 }
 
@@ -41,6 +42,7 @@ class SliverFluidGrid extends SliverFluidPadding {
   final double horizontalPadding;
   final bool fluid;
   final double spacing;
+  final double margin;
   final List<FluidCell> children;
 
   SliverFluidGrid({
@@ -48,10 +50,12 @@ class SliverFluidGrid extends SliverFluidPadding {
     this.fluid,
     this.horizontalPadding,
     this.spacing,
+    this.margin,
     this.children: const <FluidCell>[],
   }) : super(
             key: key,
             fluid: fluid,
+            margin: margin,
             sliver: _SliverFluidGrid(
               spacing: spacing,
               children: children,
@@ -112,8 +116,6 @@ class _SliverFluidGrid extends SliverVariableSizeBoxAdaptorWidget {
   }
 }
 
-
-
 class FluidCell extends StatelessWidget {
   final int fluidWidth;
   final num fluidHeight;
@@ -123,7 +125,7 @@ class FluidCell extends StatelessWidget {
   const FluidCell.fit({Key key, @required this.fluidWidth, this.child})
       : assert(fluidWidth != null && fluidWidth >= 0),
         assert(fluidWidth <= 12,
-        'The size value $fluidWidth is not valid. Maximum number of columns is 12'),
+            'The size value $fluidWidth is not valid. Maximum number of columns is 12'),
         fluidHeight = null,
         height = null,
         super(key: key);
@@ -132,15 +134,18 @@ class FluidCell extends StatelessWidget {
       {Key key, @required this.fluidWidth, @required this.height, this.child})
       : assert(fluidWidth != null && fluidWidth >= 0),
         assert(fluidWidth <= 12,
-        'The size value $fluidWidth is not valid. Maximum number of columns is 12'),
+            'The size value $fluidWidth is not valid. Maximum number of columns is 12'),
         fluidHeight = null,
         super(key: key);
 
   const FluidCell.withFluidHeight(
-      {Key key, @required this.fluidWidth, @required this.fluidHeight, this.child})
+      {Key key,
+      @required this.fluidWidth,
+      @required this.fluidHeight,
+      this.child})
       : assert(fluidWidth != null && fluidWidth >= 0),
         assert(fluidWidth <= 12,
-        'The size value $fluidWidth is not valid. Maximun number of columns is 12'),
+            'The size value $fluidWidth is not valid. Maximun number of columns is 12'),
         height = null,
         super(key: key);
 
@@ -159,4 +164,3 @@ class FluidCell extends StatelessWidget {
     }
   }
 }
-

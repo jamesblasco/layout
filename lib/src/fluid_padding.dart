@@ -5,19 +5,19 @@ import 'fluid_layout.dart';
 class FluidPadding extends StatelessWidget {
   final Widget child;
   final bool fluid;
-  final double spacing;
+  final double margin;
 
   const FluidPadding({
     Key key,
     this.child,
     this.fluid,
-    this.spacing,
+    this.margin,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _spacing = spacing ?? FluidLayout.of(context).spacing;
-    final padding = _spacing + (FluidLayout.of(context).fluidPadding ?? 0);
+    final _margin = margin ?? FluidLayout.of(context).margin;
+    final padding = _margin + (FluidLayout.of(context).fluidPadding ?? 0);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
       child: child,
@@ -27,19 +27,19 @@ class FluidPadding extends StatelessWidget {
 
 class SliverFluidPadding extends SingleChildRenderObjectWidget {
   final bool fluid;
-  final double spacing;
+  final double margin;
 
   const SliverFluidPadding({
     Key key,
     Widget sliver,
-    this.spacing,
+    this.margin,
     this.fluid,
   }) : super(key: key, child: sliver);
 
   @override
   RenderSliverPadding createRenderObject(BuildContext context) {
-    final _spacing = spacing ?? FluidLayout.of(context).spacing;
-    final padding = _spacing + (FluidLayout.of(context).fluidPadding ?? 0);
+    final _margin = margin ?? FluidLayout.of(context).margin;
+    final padding = _margin + (FluidLayout.of(context).fluidPadding ?? 0);
     return RenderSliverPadding(
       padding: EdgeInsets.symmetric(horizontal: fluid != false ? padding : 0),
       textDirection: Directionality.of(context),
@@ -49,8 +49,8 @@ class SliverFluidPadding extends SingleChildRenderObjectWidget {
   @override
   void updateRenderObject(
       BuildContext context, RenderSliverPadding renderObject) {
-    final _spacing = spacing ?? FluidLayout.of(context).spacing;
-    final padding = _spacing + (FluidLayout.of(context).fluidPadding ?? 0);
+    final _margin = margin ?? FluidLayout.of(context).margin;
+    final padding = _margin + (FluidLayout.of(context).fluidPadding ?? 0);
     renderObject
       ..padding = EdgeInsets.symmetric(horizontal: fluid != false ? padding : 0)
       ..textDirection = Directionality.of(context);

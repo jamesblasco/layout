@@ -9,4 +9,4 @@ export 'src/core/extension.dart';
 
 export 'src/formats/boostrap_format.dart';
 export 'src/formats/fluid_format.dart';
-export 'src/formats/layout_format.dart';
+export 'src/core/layout_format.dart';
