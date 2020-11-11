@@ -11,40 +11,45 @@ class ComplexColumnsFluidLayout extends StatelessWidget {
         color: Colors.grey[200],
         child: FluidLayout(
           child: Builder(
-            builder: (context) => SingleChildScrollView(
-              child: Padding(
+            builder: (context) {
+              final width = context.fluid.value(3, md: 3, sm: 4, xs: 6);
+              final bigHeight = context.fluid.value(4, md: 4, sm: 5, xs: 7);
+              final smallHeight = context.fluid.value(2, md: 2, sm: 2, xs: 2);
+              return SingleChildScrollView(
+                child: Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: FluidLayout.of(context).spacing),
                   child: FluidGridView(
-                      shrinkWrap: true,
-                      children: List.filled(
-                        100,
-                        FluidCell.withFluidHeight(
-                            fluidWidth: context.fluid(3, md: 3, sm: 4, xs: 6),
-                            fluidHeight: context.fluid(4, md: 4, sm: 5, xs: 7),
+                    shrinkWrap: true,
+                    children: List.generate(
+                      100,
+                      (index) {
+                        if (index % 3 == 0) {
+                          FluidCell.withFluidHeight(
+                            fluidWidth: width,
+                            fluidHeight: smallHeight,
                             child: CustomCard(
                               color: Colors.red,
-                              child: Center(child: Text('Item')),
-                            )),
-                      )
-                          .asMap()
-                          .map((index, value) => MapEntry(
-                                index,
-                                index % 3 == 0
-                                    ? value
-                                    : FluidCell.withFluidHeight(
-                                        fluidWidth:
-                                            context.fluid(3, md: 3, sm: 4, xs: 6),
-                                        fluidHeight:
-                                            context.fluid(2, md: 2, sm: 2, xs: 2),
-                                        child: CustomCard(
-                                          color: Colors.red,
-                                          child: Center(child: Text('Item')),
-                                        )),
-                              ))
-                          .values
-                          .toList())),
-            ),
+                              child: Center(
+                                child: Text('Item'),
+                              ),
+                            ),
+                          );
+                        }
+                        return FluidCell.withFluidHeight(
+                          fluidWidth: width,
+                          fluidHeight: bigHeight,
+                          child: CustomCard(
+                            color: Colors.red,
+                            child: Center(child: Text('Item')),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),

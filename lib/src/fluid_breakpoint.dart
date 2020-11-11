@@ -1,55 +1,36 @@
-
-
 enum LayoutBreakpoint {
   us, // Ultra Small Screens
   xs, // Extra Small Screens
-  sm,  // Small Screen
-  md,  // Small Screen
-  lg,  // Medium Screens
+  sm, // Small Screen
+  md, // Small Screen
+  lg, // Medium Screens
   xl, // Medium Screens
-  ul  //  Ultra Large Screens
+  ul //  Ultra Large Screens
 }
 
-
-extension FluidBreakpointsHelper on LayoutBreakpoint {
+extension FluidBreakpointExtension on LayoutBreakpoint {
   LayoutBreakpoint get smallerBreakpoint {
-    switch (this) {
-      case LayoutBreakpoint.us:
-        return null;
-      case LayoutBreakpoint.xs:
-        return LayoutBreakpoint.us;
-      case LayoutBreakpoint.sm:
-        return LayoutBreakpoint.xs;
-      case LayoutBreakpoint.md:
-        return LayoutBreakpoint.sm;
-      case LayoutBreakpoint.lg:
-        return LayoutBreakpoint.md;
-      case LayoutBreakpoint.xl:
-        return LayoutBreakpoint.lg;
-      case LayoutBreakpoint.ul:
-        return LayoutBreakpoint.xl;
-    }
-    return null;
+    return {
+      LayoutBreakpoint.us: null,
+      LayoutBreakpoint.xs: LayoutBreakpoint.us,
+      LayoutBreakpoint.sm: LayoutBreakpoint.xs,
+      LayoutBreakpoint.md: LayoutBreakpoint.sm,
+      LayoutBreakpoint.lg: LayoutBreakpoint.md,
+      LayoutBreakpoint.xl: LayoutBreakpoint.lg,
+      LayoutBreakpoint.ul: LayoutBreakpoint.xl
+    }[this];
   }
 
   LayoutBreakpoint get biggerBreakpoint {
-    switch (this) {
-      case LayoutBreakpoint.us:
-        return LayoutBreakpoint.xs;
-      case LayoutBreakpoint.xs:
-        return LayoutBreakpoint.sm;
-      case LayoutBreakpoint.sm:
-        return LayoutBreakpoint.md;
-      case LayoutBreakpoint.md:
-        return LayoutBreakpoint.lg;
-      case LayoutBreakpoint.lg:
-        return LayoutBreakpoint.xl;
-      case LayoutBreakpoint.xl:
-        return LayoutBreakpoint.us;
-      case LayoutBreakpoint.us:
-        return null;
-    }
-    return null;
+    return {
+      LayoutBreakpoint.us: LayoutBreakpoint.xs,
+      LayoutBreakpoint.xs: LayoutBreakpoint.sm,
+      LayoutBreakpoint.sm: LayoutBreakpoint.md,
+      LayoutBreakpoint.md: LayoutBreakpoint.lg,
+      LayoutBreakpoint.lg: LayoutBreakpoint.xl,
+      LayoutBreakpoint.xl: LayoutBreakpoint.ul,
+      LayoutBreakpoint.ul: null,
+    }[this];
   }
 
   bool get isUs => LayoutBreakpoint.us == this;

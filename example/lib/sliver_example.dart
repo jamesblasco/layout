@@ -1,6 +1,5 @@
 import 'package:fluid_layout/fluid_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class MySecondPage extends StatefulWidget {
   MySecondPage({Key key, this.title}) : super(key: key);
@@ -57,9 +56,8 @@ class _MyHomePageState extends State<MySecondPage> {
                 sliver: SliverFluidGrid(
               children: [
                 FluidCell.withFixedHeight(
-                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
-                      ? 3
-                      : 6,
+                  fluidWidth:
+                      FluidLayout.of(context).breakpoint.isLargerThanM ? 3 : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,
@@ -71,9 +69,8 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
-                      ? 3
-                      : 6,
+                  fluidWidth:
+                      FluidLayout.of(context).breakpoint.isLargerThanM ? 3 : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,
@@ -85,9 +82,8 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
-                      ? 3
-                      : 6,
+                  fluidWidth:
+                      FluidLayout.of(context).breakpoint.isLargerThanM ? 3 : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,
@@ -99,9 +95,8 @@ class _MyHomePageState extends State<MySecondPage> {
                       )),
                 ),
                 FluidCell.withFixedHeight(
-                  fluidWidth: FluidLayout.of(context).breakpoint.isLargerThanM
-                      ? 3
-                      : 6,
+                  fluidWidth:
+                      FluidLayout.of(context).breakpoint.isLargerThanM ? 3 : 6,
                   height: 40,
                   child: Container(
                       color: Colors.green,

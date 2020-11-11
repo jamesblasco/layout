@@ -22,7 +22,8 @@ dependencies:
   flutter_staggered_grid_view: ^0.3.0
   fluid_layout:
     path: ../
-  device_preview: ^0.4.4
+  device_preview: ^0.5.0-prerelease.16
+  gap: ^1.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

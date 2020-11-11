@@ -20,8 +20,10 @@ class ColumnsFluidLayout extends StatelessWidget {
                     children: List.filled(
                       100,
                       FluidCell.withFluidHeight(
-                          fluidWidth: context.fluid(3, md: 3, sm: 4, xs: 6),
-                          fluidHeight: context.fluid(3, md: 3, sm: 4, xs: 6),
+                          fluidWidth:
+                              context.fluid.value(3, md: 3, sm: 4, xs: 6),
+                          fluidHeight:
+                              context.fluid.value(3, md: 3, sm: 4, xs: 6),
                           child: CustomCard(
                             color: Colors.red,
                             child: Center(child: Text('Item')),

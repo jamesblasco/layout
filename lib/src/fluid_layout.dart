@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fluid_layout/fluid_layout.dart';
 import 'package:fluid_layout/src/fluid_breakpoint.dart';
 import 'package:fluid_layout/src/core/layout_format.dart';
@@ -7,16 +5,28 @@ import 'package:flutter/widgets.dart';
 
 import 'formats/fluid_format.dart';
 
-
-/// Fluid Layout
-/// Class that manages all responsive data.
-/// To access it use [FluidLayout.of(context)]
+/// A widget that generates the responsive layout data for its children.
 ///
+/// It calculates a [LayoutData] according to the max width of this widget and
+/// the `format` definded.
+///
+/// This layout `format` is [FluidFormat] by default, but it is possible to
+/// use [BoostrapFormat[] or build your own [LayoutFormat]
+/// that defines how the layout should behave for different width sizes.
+///
+/// This [LayoutData] it is accesible from any widget down the tree through
+/// `FluidLayout.of(context)` or `context.fluid`
+///
+/// To generate responsive values for different sizes, use the following method
+/// `context.fluid.value(defaultValue, xs: 1, s:2, m: 3, l:4, xl:5)`
+///
+/// See also:
+///   - [FluidPadding] A widget that adds a responsive padding to its child. This
+///     padding is calculated by `Fluidlayout`
 class FluidLayout extends StatefulWidget {
-  static FluidLayoutData of(BuildContext context) =>
-      context
-          .dependOnInheritedWidgetOfExactType<FluidLayoutInheritedWidget>()
-          .data;
+  static LayoutData of(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<_FluidLayoutInheritedWidget>()
+      .data;
 
   final Widget child;
 
@@ -32,8 +42,17 @@ class FluidLayout extends StatefulWidget {
   _FluidLayoutState createState() => _FluidLayoutState();
 }
 
+class LayoutData {
+  LayoutData({
+    Key key,
+    this.containerWidth,
+    this.margin,
+    this.fluidWidth,
+    this.format,
+    this.spacing,
+    this.breakpoint,
+  }) : padding = (containerWidth - fluidWidth) / 2;
 
-class FluidLayoutData {
   final double containerWidth;
   final double fluidWidth;
   final double spacing;
@@ -41,15 +60,13 @@ class FluidLayoutData {
   final LayoutBreakpoint breakpoint;
   final LayoutFormat format;
 
-  double get fluidPadding => (containerWidth - fluidWidth) / 2;
+  final double padding;
 
-  FluidLayoutData({Key key,
-    this.containerWidth,
-    this.margin,
-    this.fluidWidth,
-    this.format,
-    this.spacing,
-    this.breakpoint});
+  T value<T>(T value, {T us, T xs, T sm, T md, T lg, T xl, T ul}) {
+    return BreakpointValue(value,
+            us: us, xs: xs, sm: sm, md: md, lg: lg, xl: xl, ul: ul)
+        .resolve(this);
+  }
 }
 
 class _FluidLayoutState extends State<FluidLayout> {
@@ -58,41 +75,36 @@ class _FluidLayoutState extends State<FluidLayout> {
   @override
   Widget build(BuildContext context) {
     final format = widget.format ?? FluidFormat();
-    return LayoutBuilder(builder: (context, constraints) {
-      final double containerWidth = constraints.biggest?.width ?? 0;
-      final fluidWidth = format.width.valueFromWidth(containerWidth);
-      final spacing = format.spacing.valueFromWidth(containerWidth);
-      final margin = format.spacing.valueFromWidth(containerWidth);
-      final breakpoint = format.breakpointLimit.calculateBreakpoint(
-          containerWidth);
-      final data = FluidLayoutData(
-          format: format,
-          margin: margin,
-          containerWidth: containerWidth,
-          fluidWidth: fluidWidth,
-          spacing: spacing,
-          breakpoint: breakpoint
-      );
-      return FluidLayoutInheritedWidget(
-        key: _key,
-        child: widget.child,
-        data: data,
-      );
-    });
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double containerWidth = constraints.biggest?.width ?? 0;
+        final LayoutData data = format.resolve(containerWidth);
+        return _FluidLayoutInheritedWidget(
+          key: _key,
+          child: widget.child,
+          data: data,
+        );
+      },
+    );
   }
 }
 
-class FluidLayoutInheritedWidget extends InheritedWidget {
-  final FluidLayoutData data;
+class _FluidLayoutInheritedWidget extends InheritedWidget {
+  final LayoutData data;
 
-  FluidLayoutInheritedWidget({
+  _FluidLayoutInheritedWidget({
     Key key,
     this.data,
     Widget child,
   }) : super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(FluidLayoutInheritedWidget oldWidget) {
+  bool updateShouldNotify(_FluidLayoutInheritedWidget oldWidget) {
     return oldWidget.data.containerWidth != data.containerWidth;
   }
+}
+
+extension FluidContext on BuildContext {
+  LayoutData get fluid => FluidLayout.of(this);
+  LayoutBreakpoint get breakpoint => FluidLayout.of(this).breakpoint;
 }
