@@ -1,3 +1,9 @@
+**IMPORTANT!** This package is now deprecated. 
+
+Consider using [layout](https://github.com/jamesblasco/layout/) instead
+
+
+---
 ![Lava Clock](https://github.com/jamesblasco/fluid_layout/blob/master/fluid_layout_logo.png?raw=true)
 
 # Fluid Layout
