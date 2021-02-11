@@ -1,4 +1,3 @@
-/*
 // This is a basic Flutter widget test.
 //
 // To perform an interaction with a widget in your test, use the WidgetTester
@@ -16,7 +15,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
-    // Verify thatt our counter starts at 0.
+    // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
 
@@ -29,4 +28,3 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
-*/

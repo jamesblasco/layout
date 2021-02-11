@@ -1,1 +1,9 @@
-## [0.1.0] Released on (2019 December 24)
+## [0.5.0] - First Version
+
+## [0.5.1] - Add nullable Layout
+You can access layout safely with
+```dart
+Layout.maybeOf(context)
+```
+
+
