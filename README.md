@@ -19,9 +19,11 @@ Follow the instructions to install it [here](https://pub.dev/packages/layout/ins
 
 ## Getting started 
 
-If you want to learn more in detail about layout in Material Design I recommend you the [official website](https://material.io/design/layout/understanding-layout.html#columns-gutters-and-margins).
-
 This package aims to provide the tools to implement a responsive layout in an easy and consistent way.
+
+If you want to learn more in detail about layout in Material Design I recommend you the [official website](https://material.io/design/layout/understanding-layout.html#columns-gutters-and-margins). 
+
+Let's get started!
 
 Everything starts with the `Layout` widget. Usually added at the top of your widget tree, but you can place it wherever you need it. 
 It uses its widget constraints to calculate its breakpoint, columns, gutters, and margins.
@@ -86,8 +88,13 @@ const displaySidebar = const BreakpointValue(xs: false, md: true);
 ```
 Then it can be used in any widget that as some Layout up in the tree as:
 ```dart
-if(displaySidebar.resolve(context))
-  SideBar();
+return Column(
+  children: [
+    child,
+    if(displaySidebar.resolve(context))
+      SideBar();
+  ]
+);
 ```
 
 You can also create values relative to the layout width like.
