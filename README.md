@@ -119,5 +119,6 @@ Margin widths are defined as fixed values at each breakpoint range. To better ad
 By default the margin values are the ones from the Material Design Guidelines. 16dp for screens with a width less than 720dp and 24 for bigger screens.
 You can override this values in any moment by providing the margin param.
 
+## Contributing
 
-
+If you want to take the time to make this project better, you can open an new [issue](https://github.com/jamesblasco/layout/issues/new/choose), of a [pull request](https://github.com/jamesblasco/layout/compare).
