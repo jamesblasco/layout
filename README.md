@@ -50,7 +50,7 @@ By default the breakpoints are defined as:
  - **sm**:  600 – 1023
  - **md**: 1024 – 1439
  - **lg**: 1440 – 1919
- - **lg**: 1920 +
+ - **xl**: 1920 +
  
  ```dart
   @override
