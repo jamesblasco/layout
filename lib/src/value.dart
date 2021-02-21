@@ -65,6 +65,10 @@ abstract class LayoutValue<T> {
   }
 }
 
+extension LayoutValueResolve on BuildContext {
+  T resolve<T>(LayoutValue<T> value) => value.resolve(this);
+}
+
 class ConstantLayoutValue<T> extends LayoutValue<T> {
   final T value;
 
