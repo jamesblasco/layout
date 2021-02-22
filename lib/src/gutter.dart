@@ -9,6 +9,12 @@ class Gutter extends StatelessWidget {
     Key? key,
   ]) : super(key: key);
 
+  static List<Widget> separateList({
+    required List<Widget> children,
+    required double extent,
+  }) =>
+      children.separate(extent);
+
   @override
   Widget build(BuildContext context) {
     return Gap(extent ?? context.layout.gutter);
@@ -26,4 +32,13 @@ class SliverGutter extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverGap(extent ?? context.layout.gutter);
   }
+}
+
+extension ListGutter on List<Widget> {
+  List<Widget> separate(double extend) => length <= 1
+      ? this
+      : sublist(1).fold(
+          [first],
+          (r, element) => [...r, Gap(extend), element],
+        );
 }
