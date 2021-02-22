@@ -9,7 +9,7 @@ class Gutter extends StatelessWidget {
     Key? key,
   ]) : super(key: key);
 
-  static List<Widget> separateList({
+  static List<Widget> separateChildren({
     required List<Widget> children,
     required double extent,
   }) =>
