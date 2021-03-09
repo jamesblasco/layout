@@ -11,7 +11,7 @@ class Gutter extends StatelessWidget {
 
   static List<Widget> separateChildren({
     required List<Widget> children,
-    required double extent,
+    double? extent,
   }) =>
       children.separate(extent);
 
@@ -35,10 +35,10 @@ class SliverGutter extends StatelessWidget {
 }
 
 extension ListGutter on List<Widget> {
-  List<Widget> separate(double extend) => length <= 1
+  List<Widget> separate(double? extend) => length <= 1
       ? this
       : sublist(1).fold(
           [first],
-          (r, element) => [...r, Gap(extend), element],
+          (r, element) => [...r, Gutter(extend), element],
         );
 }
