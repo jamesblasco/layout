@@ -9,7 +9,7 @@ class AnimatedResize extends StatefulWidget {
 }
 
 class _AnimatedResizeState extends State<AnimatedResize>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController animationController;
 
   @override
