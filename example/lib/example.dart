@@ -217,6 +217,7 @@ class HomeBody extends StatelessWidget {
                 ),
               ),
             ),
+            SliverGutter(),
           ],
         ),
       ),
