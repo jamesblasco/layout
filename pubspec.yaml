@@ -1,6 +1,6 @@
 name: layout
 description: Layout encourage consistency across platforms, environments, and screen sizes by using uniform elements and spacing.
-version: 0.5.1
+version: 0.6.1
 homepage: https://github.com/jamesblasco/layout
 
 environment:
@@ -8,7 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  quiver:  3.0.0-nullsafety.2
+  quiver: ^3.0.0-nullsafety.2
   gap: ^2.0.0-nullsafety.1
   flutter:
     sdk: flutter
