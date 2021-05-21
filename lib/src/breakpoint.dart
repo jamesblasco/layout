@@ -37,8 +37,6 @@ extension LayoutBreakpointExtension on LayoutBreakpoint {
 
   bool get isXl => LayoutBreakpoint.xl == this;
 
-  bool get isUl => LayoutBreakpoint.xl == this;
-
   bool operator <(LayoutBreakpoint breakpoint) => this.index < breakpoint.index;
   bool operator >(LayoutBreakpoint breakpoint) => this.index > breakpoint.index;
   bool operator <=(LayoutBreakpoint breakpoint) =>

@@ -1,4 +1,7 @@
-## [0.6.1] - Preview null-safety package
+## [0.6.2] - Update dependencies to stable null-safety version
+
+## [0.6.1] - Enable null-safety
+
 
 ## [0.5.1] - Add nullable Layout
 You can access layout safely with
@@ -6,6 +9,4 @@ You can access layout safely with
 Layout.maybeOf(context)
 ```
 
-
 ## [0.5.0] - First Version
-

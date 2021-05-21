@@ -5,6 +5,22 @@ import 'package:layout/src/value.dart';
 import 'breakpoint.dart';
 import 'formats/material_format.dart';
 
+class LayoutContext {
+  final Size size;
+  double get width => size.width;
+
+  final LayoutBreakpoint breakpoint;
+  final double devicePixelRatio;
+  final VisualDensity visualDensity;
+
+  LayoutContext({
+    required this.size,
+    required this.breakpoint,
+    required this.devicePixelRatio,
+    VisualDensity? visualDensity,
+  }) : this.visualDensity = visualDensity ?? VisualDensity.adaptivePlatformDensity;
+}
+
 /// A widget that generates the responsive layout data for its children.
 ///
 /// It calculates a [LayoutData] according to the max width of this widget and
@@ -46,19 +62,27 @@ class Layout extends StatefulWidget {
   _LayoutState createState() => _LayoutState();
 }
 
-class LayoutData {
+class LayoutData extends LayoutContext {
+  
   LayoutData({
     Key? key,
-    required this.size,
+    required Size size,
+    required double devicePixelRatio,
+    required VisualDensity visualDensity,
     required this.margin,
     required this.format,
     required this.gutter,
     required this.breakpoint,
     required this.columns,
     required this.maxWidth,
-  }) : fluidMargin = (size.width - maxWidth) / 2;
+  })  : fluidMargin = (size.width - maxWidth) / 2,
+        super(
+          size: size,
+          breakpoint: breakpoint,
+          devicePixelRatio: devicePixelRatio,
+          visualDensity: visualDensity,
+        );
 
-  final Size size;
   final LayoutBreakpoint breakpoint;
   final LayoutFormat format;
 
@@ -79,6 +103,10 @@ class LayoutData {
     ).resolveForLayout(this);
   }
 
+  T resolve<T>(LayoutValue<T> value) {
+    return value.resolveForLayout(this);
+  }
+
   double get width => size.width;
   double get height => size.height;
 }
@@ -92,7 +120,10 @@ class _LayoutState extends State<Layout> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final Size size = constraints.biggest;
-        final LayoutData data = format.resolve(size);
+
+        final MediaQueryData mediaQuery = MediaQuery.of(context);
+        final visualDensity = format.visualDensity(context);
+        final LayoutData data = format.resolve(size, mediaQuery, visualDensity);
         return _LayoutInheritedWidget(
           key: _key,
           child: widget.child,
@@ -118,7 +149,7 @@ class _LayoutInheritedWidget extends InheritedWidget {
   }
 }
 
-extension LayoutContext on BuildContext {
+extension LayoutBuildContext on BuildContext {
   LayoutData get layout => Layout.of(this);
   LayoutBreakpoint get breakpoint => Layout.of(this).breakpoint;
 }
