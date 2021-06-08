@@ -109,7 +109,7 @@ Margins are the space between content and the left and right edges of the screen
   @override
   Widget build(BuildContext context) {
     return Margin(
-      child: Text('This text),
+      child: Text('This text'),
     );
   }
 ```
