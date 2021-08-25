@@ -83,23 +83,32 @@ final double padding = context.layout.value(
 Layout values can be reused in different parts of the app with even different `Layout` widgets. For that they need to be created as
 ```dart
 final displaySidebar = LayoutValue.breakpoint(xs: false, md: true);
-or
-const displaySidebar = const BreakpointValue(xs: false, md: true);
+
+final horizontalMargin = LayoutValue((layout) {
+    double margin = layout.width >= 500 ? 24.0 : 16.0;
+    margin += 8.0 * layout.visualDensity.horizontal;
+    return EdgeInsets.symmetric(horizontal: margin);
+});
 ```
 Then it can be used in any widget that as some Layout up in the tree as:
+
 ```dart
 return Column(
   children: [
-    child,
+    Padding(
+      padding: horizontalMargin.resolve(context),
+      child:child,
+    ),
     if(displaySidebar.resolve(context))
-      SideBar();
-  ]
+      SideBar(),
+    ),
+  ],
 );
 ```
 
 You can also create values relative to the layout width like.
 ```dart
-final displaySidebar = LayoutValue.widthBuilder((width) => width > 600);
+final displaySidebar = LayoutValue((layout) => layout.width > 600);
 ```
 
 ## Margins
@@ -109,7 +118,7 @@ Margins are the space between content and the left and right edges of the screen
   @override
   Widget build(BuildContext context) {
     return Margin(
-      child: Text('This text),
+      child: Text('This text'),
     );
   }
 ```
@@ -119,6 +128,55 @@ Margin widths are defined as fixed values at each breakpoint range. To better ad
 By default the margin values are the ones from the Material Design Guidelines. 16dp for screens with a width less than 720dp and 24 for bigger screens.
 You can override this values in any moment by providing the margin param.
 
-## Contributing
+## Fluid Margins
 
+Some times you want to have a fixed width that stays the same across screen sizes.
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return FluidMargin(
+      child: Text('This text'),
+    );
+  }
+```
+
+Fluid margins are dinamically updated to keep a fixed size of its inner child. This fixed sizes are by default the ones from the Material Design Guidelines but can also easily customizable.
+
+
+## AdaptiveBuilder
+
+A widget tha allows easily to build responsive layouts
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return AdaptiveBuilder(
+      xs: (context) => LayoutWithBottomNavigationBar(),
+      lg: (context) => LayoutWithTrailingNavigationBar(),
+    );
+  }
+```
+
+or for more complex cases
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return  AdaptiveBuilder.builder(
+      builder: (context, layout, child) {
+        if (layout.breakpoint < LayoutBreakpoint.lg) {
+          return LayoutWithBottomNavigationBar(child: child);
+        } else {
+          return LayoutWithTrailingNavigationBar(child: child);
+        }
+      },
+      child: child,
+    );
+  }
+```
+
+
+
+## Contributing
 If you want to take the time to make this project better, you can open an new [issue](https://github.com/jamesblasco/layout/issues/new/choose), of a [pull request](https://github.com/jamesblasco/layout/compare).

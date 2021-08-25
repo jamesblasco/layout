@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 
-class SliverGridDelegateWithFixedCrossAxisCountAndMainAxisExtent extends SliverGridDelegate {
+class SliverGridDelegateWithFixedCrossAxisCountAndMainAxisExtent
+    extends SliverGridDelegate {
   /// Creates a delegate that makes grid layouts with a fixed number of tiles in
   /// the cross axis and a fixed main axis extent.
   ///
@@ -14,10 +15,10 @@ class SliverGridDelegateWithFixedCrossAxisCountAndMainAxisExtent extends SliverG
     required this.mainAxisExtent,
     this.mainAxisSpacing = 0.0,
     this.crossAxisSpacing = 0.0,
-  }) : assert(crossAxisCount != null && crossAxisCount > 0),
-       assert(mainAxisSpacing != null && mainAxisSpacing >= 0),
-       assert(crossAxisSpacing != null && crossAxisSpacing >= 0),
-       assert(mainAxisExtent != null && mainAxisExtent > 0);
+  })  : assert(crossAxisCount != null && crossAxisCount > 0),
+        assert(mainAxisSpacing != null && mainAxisSpacing >= 0),
+        assert(crossAxisSpacing != null && crossAxisSpacing >= 0),
+        assert(mainAxisExtent != null && mainAxisExtent > 0);
 
   /// The number of children in the cross axis.
   final int crossAxisCount;
@@ -57,10 +58,11 @@ class SliverGridDelegateWithFixedCrossAxisCountAndMainAxisExtent extends SliverG
   }
 
   @override
-  bool shouldRelayout(SliverGridDelegateWithFixedCrossAxisCountAndMainAxisExtent oldDelegate) {
-    return oldDelegate.crossAxisCount != crossAxisCount
-        || oldDelegate.mainAxisSpacing != mainAxisSpacing
-        || oldDelegate.crossAxisSpacing != crossAxisSpacing
-        || oldDelegate.mainAxisExtent != mainAxisExtent;
+  bool shouldRelayout(
+      SliverGridDelegateWithFixedCrossAxisCountAndMainAxisExtent oldDelegate) {
+    return oldDelegate.crossAxisCount != crossAxisCount ||
+        oldDelegate.mainAxisSpacing != mainAxisSpacing ||
+        oldDelegate.crossAxisSpacing != crossAxisSpacing ||
+        oldDelegate.mainAxisExtent != mainAxisExtent;
   }
 }

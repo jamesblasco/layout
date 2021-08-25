@@ -1,3 +1,4 @@
+
 enum LayoutBreakpoint {
   xs, // Extra Small Screens
   sm, // Small Screen
@@ -36,8 +37,6 @@ extension LayoutBreakpointExtension on LayoutBreakpoint {
   bool get isL => LayoutBreakpoint.lg == this;
 
   bool get isXl => LayoutBreakpoint.xl == this;
-
-  bool get isUl => LayoutBreakpoint.xl == this;
 
   bool operator <(LayoutBreakpoint breakpoint) => this.index < breakpoint.index;
   bool operator >(LayoutBreakpoint breakpoint) => this.index > breakpoint.index;

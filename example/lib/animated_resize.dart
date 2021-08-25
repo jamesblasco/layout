@@ -33,7 +33,6 @@ class _AnimatedResizeState extends State<AnimatedResize>
   @override
   Widget build(BuildContext context) {
     return Container(
-     
       alignment: Alignment.center,
       child: AnimatedBuilder(
         animation: animationController,

@@ -38,22 +38,35 @@ abstract class LayoutFormat {
   /// Max width allow in FixedWidth widget.
   final LayoutValue<double> maxWidth = LayoutValue.screenWidth;
 
-  LayoutData resolve(Size layoutSize) {
-    final double width = layoutSize.width;
-    final LayoutBreakpoint breakpoint = breakpointForWidth(width);
-    final double maxWidth =
-        min(width, this.maxWidth.resolveForLayoutData(width, breakpoint));
-    final double spacing = this.gutter.resolveForLayoutData(width, breakpoint);
-    final double margin = this.margin.resolveForLayoutData(width, breakpoint);
-    final int columns = this.columns.resolveForLayoutData(width, breakpoint);
+  VisualDensity visualDensity(BuildContext context) {
+    return Theme.of(context).visualDensity;
+  }
+
+  LayoutData resolve(
+    Size layoutSize,
+    MediaQueryData mediaQuery,
+    VisualDensity visualDensity,
+  ) {
+    final width = layoutSize.width;
+    final context = LayoutContext(
+        size: layoutSize,
+        breakpoint: breakpointForWidth(layoutSize.width),
+        devicePixelRatio: mediaQuery.devicePixelRatio,
+        visualDensity: visualDensity);
+    final double maxWidth = min(width, this.maxWidth.resolveForLayout(context));
+    final double spacing = this.gutter.resolveForLayout(context);
+    final double margin = this.margin.resolveForLayout(context);
+    final int columns = this.columns.resolveForLayout(context);
     return LayoutData(
       format: this,
       margin: margin,
       size: layoutSize,
       maxWidth: maxWidth,
       gutter: spacing,
-      breakpoint: breakpoint,
       columns: columns,
+      breakpoint: context.breakpoint,
+      devicePixelRatio: context.devicePixelRatio,
+      visualDensity: visualDensity,
     );
   }
 
@@ -66,6 +79,6 @@ abstract class LayoutFormat {
         return breakpoint;
       }
     }
-    return LayoutBreakpoint.md;
+    return LayoutBreakpoint.xs;
   }
 }

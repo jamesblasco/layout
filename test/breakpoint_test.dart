@@ -1,10 +1,8 @@
-
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:layout/layout.dart';
 
 void main() {
-   group('Breakpoints: ', () {
+  group('Breakpoints: ', () {
     test('xs is smaller than sm', () {
       expect(LayoutBreakpoint.xs < LayoutBreakpoint.sm, true);
       expect(LayoutBreakpoint.xs > LayoutBreakpoint.sm, false);
@@ -44,7 +42,7 @@ void main() {
         breakpoint = breakpoint.bigger!;
       }
     });
-     test('smaller method', () {
+    test('smaller method', () {
       LayoutBreakpoint breakpoint = LayoutBreakpoint.xl;
       while (breakpoint.smaller != null) {
         expect(breakpoint > breakpoint.smaller!, true);
