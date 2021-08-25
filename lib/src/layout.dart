@@ -18,7 +18,8 @@ class LayoutContext {
     required this.breakpoint,
     required this.devicePixelRatio,
     VisualDensity? visualDensity,
-  }) : this.visualDensity = visualDensity ?? VisualDensity.adaptivePlatformDensity;
+  }) : this.visualDensity =
+            visualDensity ?? VisualDensity.adaptivePlatformDensity;
 }
 
 /// A widget that generates the responsive layout data for its children.
@@ -63,7 +64,6 @@ class Layout extends StatefulWidget {
 }
 
 class LayoutData extends LayoutContext {
-  
   LayoutData({
     Key? key,
     required Size size,
@@ -83,15 +83,29 @@ class LayoutData extends LayoutContext {
           visualDensity: visualDensity,
         );
 
+  /// Breakpoint screen size for the given context
   final LayoutBreakpoint breakpoint;
+
+  /// Layout format that defines the properties for the given context
   final LayoutFormat format;
 
+  /// Spacing value between items. For example, space between cells in a grid
   final double gutter;
+
+  /// Padding between the edge of the screens and the content
   final double margin;
+
+  /// Number of columns in a grid layout for the given context
   final int columns;
 
+  /// Responsive margin to constraint the content to a max width
   final double fluidMargin;
+
+  /// Constrained width for the content inside fluid layouts.
   final double maxWidth;
+
+  /// Total margin based on the relative margin and the fluid margin
+  double get fullMargin => fluidMargin + margin;
 
   T value<T>({required T xs, T? sm, T? md, T? lg, T? xl}) {
     return LayoutValue.fromBreakpoint(

@@ -1,6 +1,6 @@
 name: layout
 description: Layout encourage consistency across platforms, environments, and screen sizes by using uniform elements and spacing.
-version: 0.6.2
+version: 1.0.1
 homepage: https://github.com/jamesblasco/layout
 
 environment:
