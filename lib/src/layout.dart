@@ -107,14 +107,13 @@ class LayoutData extends LayoutContext {
   /// Total margin based on the relative margin and the fluid margin
   double get fullMargin => fluidMargin + margin;
 
+  /// Total margin based on the relative margin and the fluid margin
+  EdgeInsets get horizontalMargin =>
+      EdgeInsets.symmetric(horizontal: fullMargin);
+
   T value<T>({required T xs, T? sm, T? md, T? lg, T? xl}) {
-    return LayoutValue.fromBreakpoint(
-      xs: xs,
-      sm: sm,
-      md: md,
-      lg: lg,
-      xl: xl,
-    ).resolveForLayout(this);
+    return LayoutValue(xs: xs, sm: sm, md: md, lg: lg, xl: xl)
+        .resolveForLayout(this);
   }
 
   T resolve<T>(LayoutValue<T> value) {
@@ -135,7 +134,10 @@ class _LayoutState extends State<Layout> {
       builder: (context, constraints) {
         final Size size = constraints.biggest;
 
-        final MediaQueryData mediaQuery = MediaQuery.of(context);
+        final MediaQueryData mediaQuery = MediaQuery.maybeOf(context) ??
+            MediaQueryData.fromWindow(
+              WidgetsBinding.instance!.window,
+            );
         final visualDensity = format.visualDensity(context);
         final LayoutData data = format.resolve(size, mediaQuery, visualDensity);
         return _LayoutInheritedWidget(
