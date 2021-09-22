@@ -4,9 +4,6 @@ import 'package:layout/src/layout.dart';
 
 import 'breakpoint.dart';
 
-typedef _WidthBuilder<T> = T Function(double containerWidth);
-
-typedef BreakpointValueBuilder<T> = T Function(LayoutBreakpoint breakpoint);
 
 mixin LayoutValueMixin<T> {
   T resolveForLayout(LayoutContext layout);
@@ -42,22 +39,18 @@ typedef LayoutValueBuilder<T> = T Function(LayoutContext layout);
 ///   - [BreakpointValue], a value that adapts dinamically to relative width
 ///     screen breakpoints
 abstract class LayoutValue<T> with LayoutValueMixin<T> {
-  factory LayoutValue(LayoutValueBuilder<T> builder) = _DefaultLayoutValue<T>;
-  factory LayoutValue.value(T value) = ConstantLayoutValue<T>;
-  factory LayoutValue.fromBreakpoint({
+  factory LayoutValue({
     required T xs,
     T? sm,
     T? md,
     T? lg,
     T? xl,
   }) = BreakpointValue<T>;
+  factory LayoutValue.builder(LayoutValueBuilder<T> builder) =
+      _DefaultLayoutValue<T>;
+  factory LayoutValue.value(T value) = ConstantLayoutValue<T>;
 
   static const screenWidth = _ScreenWidthValue();
-
-  factory LayoutValue.widthBuilder(_WidthBuilder<T> builder) =
-      _WidthBuilderValue<T>.fromWidth;
-  factory LayoutValue.breakpointBuilder(BreakpointValueBuilder<T> builder) =
-      _BreakpointBuilderValue<T>;
 }
 
 abstract class BaseLayoutValue<T> implements LayoutValue<T> {
@@ -165,30 +158,6 @@ class ConstantLayoutValue<T> extends BaseLayoutValue<T> {
 
   @override
   T resolveForLayout(LayoutContext layout) => value;
-}
-
-class _WidthBuilderValue<T> extends BaseLayoutValue<T> {
-  const _WidthBuilderValue.fromWidth(this.builder);
-
-  final _WidthBuilder<T> builder;
-
-  @override
-  T resolveForLayout(LayoutContext layout) => builder(layout.size.width);
-}
-
-class _BreakpointBuilderValue<T> extends BaseLayoutValue<T> {
-  final BreakpointValueBuilder builder;
-
-  const _BreakpointBuilderValue(this.builder);
-
-  T resolveForBreakpoint(LayoutBreakpoint breakpoint) {
-    return builder(breakpoint);
-  }
-
-  @override
-  T resolveForLayout(LayoutContext layout) {
-    return resolveForBreakpoint(layout.breakpoint);
-  }
 }
 
 class _ScreenWidthValue extends BaseLayoutValue<double> {

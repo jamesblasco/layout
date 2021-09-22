@@ -8,7 +8,6 @@ environment:
   flutter: ">=2.0.0"
 
 dependencies:
-  quiver: ^3.0.1
   gap: ^2.0.0
   flutter:
     sdk: flutter

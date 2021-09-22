@@ -25,8 +25,8 @@ class AdaptiveBuilder extends StatelessWidget {
     Key? key,
     required LayoutWidgetBuilder builder,
     Widget? child,
-  })  : this.child = LayoutValue((layout) {
-          return (context) => builder(context, layout, child);
+  })  : this.child = LayoutValue.builder((layoutContext) {
+          return (context) => builder(context, layoutContext, child);
         }),
         super(key: key);
 
