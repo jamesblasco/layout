@@ -1,9 +1,5 @@
 <a  href="https://pub.dev/packages/layout"><img src="https://github.com/jamesblasco/layout/blob/main/layout_banner.png?raw=true"/></a> 
 
-
-**IMPORTANT!** This package is in a beta preview and built with Dart null-safety.
-
-
 # Layout
 [![pub package](https://img.shields.io/pub/v/layout.svg)](https://pub.dev/packages/layout)  
 
@@ -82,9 +78,9 @@ final double padding = context.layout.value(
 
 Layout values can be reused in different parts of the app with even different `Layout` widgets. For that they need to be created as
 ```dart
-final displaySidebar = LayoutValue.breakpoint(xs: false, md: true);
+final displaySidebar = LayoutValue(xs: false, md: true);
 
-final horizontalMargin = LayoutValue((layout) {
+final horizontalMargin = LayoutValue.builder((layout) {
     double margin = layout.width >= 500 ? 24.0 : 16.0;
     margin += 8.0 * layout.visualDensity.horizontal;
     return EdgeInsets.symmetric(horizontal: margin);
@@ -108,7 +104,7 @@ return Column(
 
 You can also create values relative to the layout width like.
 ```dart
-final displaySidebar = LayoutValue((layout) => layout.width > 600);
+final displaySidebar = LayoutValue.builder((layout) => layout.width > 600);
 ```
 
 ## Margins
