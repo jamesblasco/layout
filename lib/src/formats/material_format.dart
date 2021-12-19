@@ -15,9 +15,9 @@ class MaterialLayoutFormat extends LayoutFormat {
   @override
   final LayoutValue<double> margin;
 
-  static final LayoutValue<double> _defaultMargin = LayoutValue.widthBuilder(
-    (width) {
-      return width <= 719 ? 16 : 24;
+  static final LayoutValue<double> _defaultMargin = LayoutValue.builder(
+    (layout) {
+      return layout.width <= 719 ? 16 : 24;
     },
   );
 
@@ -40,8 +40,9 @@ class MaterialLayoutFormat extends LayoutFormat {
   );
 
   @override
-  final LayoutValue<int> columns = LayoutValue.widthBuilder(
-    (double width) {
+  final LayoutValue<int> columns = LayoutValue.builder(
+    (layout) {
+      final width = layout.width;
       if (width <= 599) {
         return 4;
       } else if (width <= 839) {

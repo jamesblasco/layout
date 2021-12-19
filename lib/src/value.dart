@@ -1,11 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:layout/src/layout.dart';
 
 import 'breakpoint.dart';
 
-typedef _WidthBuilder<T> = T Function(double containerWidth);
 
-typedef BreakpointValueBuilder<T> = T Function(LayoutBreakpoint breakpoint);
+mixin LayoutValueMixin<T> {
+  T resolveForLayout(LayoutContext layout);
+
+  T resolve(BuildContext context) {
+    final layout = Layout.of(context);
+    return resolveForLayout(layout);
+  }
+}
+
+typedef LayoutValueBuilder<T> = T Function(LayoutContext layout);
 
 /// A responsive value that adapts dynamically to the width of the screen.
 ///
@@ -29,35 +38,23 @@ typedef BreakpointValueBuilder<T> = T Function(LayoutBreakpoint breakpoint);
 /// See also:
 ///   - [BreakpointValue], a value that adapts dinamically to relative width
 ///     screen breakpoints
-///
-abstract class LayoutValue<T> {
-  const LayoutValue();
-
-  factory LayoutValue.constant(T value) => ConstantLayoutValue<T>(value);
-
-  factory LayoutValue.fromBreakpoint({
+abstract class LayoutValue<T> with LayoutValueMixin<T> {
+  factory LayoutValue({
     required T xs,
     T? sm,
     T? md,
     T? lg,
     T? xl,
-  }) {
-    return BreakpointValue<T>(xs: xs, sm: sm, md: md, lg: lg, xl: xl);
-  }
-
-  factory LayoutValue.widthBuilder(_WidthBuilder<T> builder) {
-    return _WidthBuilderValue<T>.fromWidth(builder);
-  }
-  static LayoutValue<T> breakpointBuilder<T>(
-      BreakpointValueBuilder<T> builder) {
-    return _BreakpointBuilderValue<T>(builder);
-  }
+  }) = BreakpointValue<T>;
+  factory LayoutValue.builder(LayoutValueBuilder<T> builder) =
+      _DefaultLayoutValue<T>;
+  factory LayoutValue.value(T value) = ConstantLayoutValue<T>;
 
   static const screenWidth = _ScreenWidthValue();
+}
 
-  T resolveForLayout(LayoutData layout);
-
-  T resolveForLayoutData(double width, LayoutBreakpoint breakpoint);
+abstract class BaseLayoutValue<T> implements LayoutValue<T> {
+  const BaseLayoutValue();
 
   T resolve(BuildContext context) {
     final layout = Layout.of(context);
@@ -65,20 +62,12 @@ abstract class LayoutValue<T> {
   }
 }
 
-class ConstantLayoutValue<T> extends LayoutValue<T> {
-  final T value;
-
-  const ConstantLayoutValue(this.value);
-
-  @override
-  T resolveForLayout(LayoutData layout) {
-    return value;
-  }
+class _DefaultLayoutValue<T> extends BaseLayoutValue<T> {
+  final LayoutValueBuilder<T> builder;
+  const _DefaultLayoutValue(this.builder);
 
   @override
-  T resolveForLayoutData(double width, LayoutBreakpoint breakpoint) {
-    return value;
-  }
+  T resolveForLayout(LayoutContext layout) => builder(layout);
 }
 
 /// A responsive value that adapts dynamically dinamically to relative width
@@ -103,7 +92,7 @@ class ConstantLayoutValue<T> extends LayoutValue<T> {
 /// See also:
 ///   - [BreakpointValue], a value that adapts dinamically to relative width
 ///     screen breakpoints
-class BreakpointValue<T> extends LayoutValue<T> {
+class BreakpointValue<T> extends BaseLayoutValue<T> {
   final T xs;
   final T? sm;
   final T? md;
@@ -124,7 +113,7 @@ class BreakpointValue<T> extends LayoutValue<T> {
     required T md,
     required T lg,
     required T xl,
-  })   : this.xs = xs,
+  })  : this.xs = xs,
         this.sm = sm,
         this.md = md,
         this.lg = lg,
@@ -157,61 +146,23 @@ class BreakpointValue<T> extends LayoutValue<T> {
   }
 
   @override
-  T resolveForLayout(LayoutData layout) {
+  T resolveForLayout(LayoutContext layout) {
     return resolveForBreakpoint(layout.breakpoint);
   }
-
-  @override
-  T resolveForLayoutData(double width, LayoutBreakpoint breakpoint) {
-    return resolveForBreakpoint(breakpoint);
-  }
 }
 
-class _WidthBuilderValue<T> extends LayoutValue<T> {
-  const _WidthBuilderValue.fromWidth(this.builder);
+class ConstantLayoutValue<T> extends BaseLayoutValue<T> {
+  final T value;
 
-  final _WidthBuilder<T> builder;
+  const ConstantLayoutValue(this.value);
 
   @override
-  T resolveForLayout(LayoutData layout) {
-    return builder(layout.size.width);
-  }
-
-  T resolveForLayoutData(double containerWidth, format) {
-    return builder(containerWidth);
-  }
+  T resolveForLayout(LayoutContext layout) => value;
 }
 
-class _BreakpointBuilderValue<T> extends LayoutValue<T> {
-  final BreakpointValueBuilder builder;
-
-  const _BreakpointBuilderValue(this.builder);
-
-  T resolveForBreakpoint(LayoutBreakpoint breakpoint) {
-    return builder(breakpoint);
-  }
-
-  @override
-  T resolveForLayout(LayoutData layout) {
-    return resolveForBreakpoint(layout.breakpoint);
-  }
-
-  @override
-  T resolveForLayoutData(double width, LayoutBreakpoint breakpoint) {
-    return builder(breakpoint);
-  }
-}
-
-class _ScreenWidthValue extends LayoutValue<double> {
+class _ScreenWidthValue extends BaseLayoutValue<double> {
   const _ScreenWidthValue();
 
   @override
-  double resolveForLayout(LayoutData layout) {
-    return layout.size.width;
-  }
-
-  @override
-  double resolveForLayoutData(double width, LayoutBreakpoint breakpoint) {
-    return width;
-  }
+  double resolveForLayout(LayoutContext layout) => layout.width;
 }

@@ -5,6 +5,23 @@ import 'package:layout/src/value.dart';
 import 'breakpoint.dart';
 import 'formats/material_format.dart';
 
+class LayoutContext {
+  final Size size;
+  double get width => size.width;
+
+  final LayoutBreakpoint breakpoint;
+  final double devicePixelRatio;
+  final VisualDensity visualDensity;
+
+  LayoutContext({
+    required this.size,
+    required this.breakpoint,
+    required this.devicePixelRatio,
+    VisualDensity? visualDensity,
+  }) : this.visualDensity =
+            visualDensity ?? VisualDensity.adaptivePlatformDensity;
+}
+
 /// A widget that generates the responsive layout data for its children.
 ///
 /// It calculates a [LayoutData] according to the max width of this widget and
@@ -46,37 +63,61 @@ class Layout extends StatefulWidget {
   _LayoutState createState() => _LayoutState();
 }
 
-class LayoutData {
+class LayoutData extends LayoutContext {
   LayoutData({
     Key? key,
-    required this.size,
+    required Size size,
+    required double devicePixelRatio,
+    required VisualDensity visualDensity,
     required this.margin,
     required this.format,
     required this.gutter,
     required this.breakpoint,
     required this.columns,
     required this.maxWidth,
-  }) : fluidMargin = (size.width - maxWidth) / 2;
+  })  : fluidMargin = (size.width - maxWidth) / 2,
+        super(
+          size: size,
+          breakpoint: breakpoint,
+          devicePixelRatio: devicePixelRatio,
+          visualDensity: visualDensity,
+        );
 
-  final Size size;
+  /// Breakpoint screen size for the given context
   final LayoutBreakpoint breakpoint;
+
+  /// Layout format that defines the properties for the given context
   final LayoutFormat format;
 
+  /// Spacing value between items. For example, space between cells in a grid
   final double gutter;
+
+  /// Padding between the edge of the screens and the content
   final double margin;
+
+  /// Number of columns in a grid layout for the given context
   final int columns;
 
+  /// Responsive margin to constraint the content to a max width
   final double fluidMargin;
+
+  /// Constrained width for the content inside fluid layouts.
   final double maxWidth;
 
+  /// Total margin based on the relative margin and the fluid margin
+  double get fullMargin => fluidMargin + margin;
+
+  /// Total margin based on the relative margin and the fluid margin
+  EdgeInsets get horizontalMargin =>
+      EdgeInsets.symmetric(horizontal: fullMargin);
+
   T value<T>({required T xs, T? sm, T? md, T? lg, T? xl}) {
-    return LayoutValue.fromBreakpoint(
-      xs: xs,
-      sm: sm,
-      md: md,
-      lg: lg,
-      xl: xl,
-    ).resolveForLayout(this);
+    return LayoutValue(xs: xs, sm: sm, md: md, lg: lg, xl: xl)
+        .resolveForLayout(this);
+  }
+
+  T resolve<T>(LayoutValue<T> value) {
+    return value.resolveForLayout(this);
   }
 
   double get width => size.width;
@@ -92,7 +133,13 @@ class _LayoutState extends State<Layout> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final Size size = constraints.biggest;
-        final LayoutData data = format.resolve(size);
+
+        final MediaQueryData mediaQuery = MediaQuery.maybeOf(context) ??
+            MediaQueryData.fromWindow(
+              WidgetsBinding.instance!.window,
+            );
+        final visualDensity = format.visualDensity(context);
+        final LayoutData data = format.resolve(size, mediaQuery, visualDensity);
         return _LayoutInheritedWidget(
           key: _key,
           child: widget.child,
@@ -118,7 +165,7 @@ class _LayoutInheritedWidget extends InheritedWidget {
   }
 }
 
-extension LayoutContext on BuildContext {
+extension LayoutBuildContext on BuildContext {
   LayoutData get layout => Layout.of(this);
   LayoutBreakpoint get breakpoint => Layout.of(this).breakpoint;
 }

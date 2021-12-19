@@ -12,16 +12,17 @@ class FluidLayoutFormat extends LayoutFormat {
 
   @override
   LayoutValue<double> get maxWidth {
-    return LayoutValue.widthBuilder(
-      (containerWidth) {
-        final breakpoint = breakpointForWidth(containerWidth);
+    return LayoutValue.builder(
+      (layout) {
+        final width = layout.width;
+        final breakpoint = breakpointForWidth(width);
         switch (breakpoint) {
           case LayoutBreakpoint.xs:
-            return min(containerWidth, maxFluidWidth[breakpoint]!);
+            return min(width, maxFluidWidth[breakpoint]!);
           case LayoutBreakpoint.sm:
           case LayoutBreakpoint.md:
           case LayoutBreakpoint.lg:
-            return calculateFluidWidth(breakpoint, containerWidth);
+            return calculateFluidWidth(breakpoint, width);
           case LayoutBreakpoint.xl:
             return maxFluidWidth[breakpoint]!;
         }
@@ -63,9 +64,9 @@ class FluidLayoutFormat extends LayoutFormat {
   @override
   final LayoutValue<double> margin;
 
-  static final LayoutValue<double> _defaultMargin = LayoutValue.widthBuilder(
-    (width) {
-      return width <= 719 ? 16 : 24;
+  static final LayoutValue<double> _defaultMargin = LayoutValue.builder(
+    (layout) {
+      return layout.width <= 719 ? 16 : 24;
     },
   );
 
