@@ -1,6 +1,5 @@
 import 'package:example/layout_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:layout/layout.dart';
 
 import 'example.dart';

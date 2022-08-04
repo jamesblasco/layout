@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:layout/src/format.dart';
 import 'package:layout/src/value.dart';
 import 'breakpoint.dart';
@@ -136,7 +135,7 @@ class _LayoutState extends State<Layout> {
 
         final MediaQueryData mediaQuery = MediaQuery.maybeOf(context) ??
             MediaQueryData.fromWindow(
-              WidgetsBinding.instance!.window,
+              WidgetsBinding.instance.window,
             );
         final visualDensity = format.visualDensity(context);
         final LayoutData data = format.resolve(size, mediaQuery, visualDensity);
