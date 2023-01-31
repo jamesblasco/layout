@@ -5,8 +5,7 @@ import 'package:layout/layout.dart';
 
 void main() {
   test('Width Value', () {
-    final LayoutValue<double> responsiveValue =
-        LayoutValue.builder((layout) {
+    final LayoutValue<double> responsiveValue = LayoutValue.builder((layout) {
       return layout.width;
     });
     final context = LayoutContext(

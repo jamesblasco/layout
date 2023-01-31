@@ -1,4 +1,3 @@
-
 enum LayoutBreakpoint {
   xs, // Extra Small Screens
   sm, // Small Screen

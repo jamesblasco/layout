@@ -34,7 +34,6 @@ class AdaptiveBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return context.layout.resolve(child)(context);
   }
 }
