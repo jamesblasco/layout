@@ -4,7 +4,6 @@ import 'package:layout/src/layout.dart';
 
 import 'breakpoint.dart';
 
-
 mixin LayoutValueMixin<T> {
   T resolveForLayout(LayoutContext layout);
 
