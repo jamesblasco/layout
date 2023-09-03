@@ -66,7 +66,7 @@ A layout value is relative to the width of the screen. This way you can define r
 final double padding = context.layout.value(xs: 0.0, sm: 12.0, md: 24.0, lg: 32.0, xl: 48.0);
 ```
 
-The most important layout values are the ones relative to the breakpoint. This are the most common an useful as you can define a value for a different breakpoint sizes. If a breakpoint is not provided, its value will correspond to the first previous/smaller breakpoint.
+The most important layout values are the ones relative to the breakpoint. These are the most common and useful as you can define a value for different breakpoint sizes. If a breakpoint is not provided, its value will correspond to the first previous/smaller breakpoint.
 
 ```dart
 final double padding = context.layout.value(
@@ -86,7 +86,7 @@ final horizontalMargin = LayoutValue.builder((layout) {
     return EdgeInsets.symmetric(horizontal: margin);
 });
 ```
-Then it can be used in any widget that as some Layout up in the tree as:
+Then it can be used in any widget that has some Layout up in the tree as:
 
 ```dart
 return Column(
@@ -122,7 +122,7 @@ Margins are the space between content and the left and right edges of the screen
 Margin widths are defined as fixed values at each breakpoint range. To better adapt to the screen, the margin width can change at different breakpoints. Wider margins are more appropriate for larger screens, as they create more whitespace around the perimeter of content.
 
 By default the margin values are the ones from the Material Design Guidelines. 16dp for screens with a width less than 720dp and 24 for bigger screens.
-You can override this values in any moment by providing the margin param.
+You can override these values in any moment by providing the margin param.
 
 ## Fluid Margins
 
@@ -137,12 +137,12 @@ Some times you want to have a fixed width that stays the same across screen size
   }
 ```
 
-Fluid margins are dinamically updated to keep a fixed size of its inner child. This fixed sizes are by default the ones from the Material Design Guidelines but can also easily customizable.
+Fluid margins are dynamically updated to keep a fixed size of its inner child. These fixed sizes are by default the ones from the Material Design Guidelines but can also easily customizable.
 
 
 ## AdaptiveBuilder
 
-A widget tha allows easily to build responsive layouts
+A widget that allows easily to build responsive layouts
 
 ```dart
   @override
@@ -175,4 +175,4 @@ or for more complex cases
 
 
 ## Contributing
-If you want to take the time to make this project better, you can open an new [issue](https://github.com/jamesblasco/layout/issues/new/choose), of a [pull request](https://github.com/jamesblasco/layout/compare).
+If you want to take the time to make this project better, you can open an new [issue](https://github.com/jamesblasco/layout/issues/new/choose), or a [pull request](https://github.com/jamesblasco/layout/compare).
