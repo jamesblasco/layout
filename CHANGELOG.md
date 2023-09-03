@@ -1,3 +1,7 @@
+## [1.0.5] - Updates for Dart 3.0
+
+Makes it compatible with Dart 3.0 and new `gap` versions
+
 ## [1.0.4] - Updates `gap` dependency
 
 ## [1.0.1] - Add `context.layout.fullMargin`
