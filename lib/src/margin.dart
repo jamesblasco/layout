@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'layout.dart';
 
 /// A widget that adds a padding to its child. This
-/// padding is calculated by `Layout` and can be overrided
+/// padding is calculated by `Layout` and can be overridden
 /// by the margin param
 ///
 /// See also:
